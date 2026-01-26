@@ -1,222 +1,193 @@
-# Kiro Task: Build Functional MVP for Multilingual Mandi
+# Kiro: Build Demonstrable MVP — 3 Hours Left!
 
-## CRITICAL ISSUES TO FIX FIRST
+## GOAL: Fully Demonstrable Trading Flow
 
-### 1. Theme Visibility Problem
-The current theme has white/light text on cream/light backgrounds making text unreadable.
-
-**Fix:**
-- Use ONE clean theme: Orange header (#FF9933), white body background (#FFFFFF), dark text (#1a1a1a)
-- Remove all the complex theme switching for now
-- Ensure ALL text has sufficient contrast (dark text on light backgrounds, white text on dark backgrounds)
-- Remove cream/beige backgrounds that clash with text
-
-### 2. Simplify ThemeContext
-- Strip down to one simple color scheme
-- Remove festival themes, time-based themes, regional themes for MVP
-- Keep it simple: Primary (orange), Secondary (green), Background (white), Text (dark gray)
+Build a working demo where evaluators can:
+1. Browse products as buyer
+2. Place a bid on a product  
+3. Switch to seller view → see the bid notification
+4. Accept/reject the bid
+5. See translation in action throughout
 
 ---
 
-## MAIN TASK: Build Functional Dashboards
+## CORE REQUIREMENTS
 
-### Page 1: Homepage (`src/app/page.tsx`)
+### Language Switching
+- When user selects Tamil → ALL UI text changes to Tamil
+- When user selects Hindi → ALL UI text changes to Hindi
+- Use the existing i18n system properly
+- Product names can stay bilingual
 
-Create a functional homepage with:
+### No Login
+- All pages accessible directly via navigation
+- Mock user profiles shown (no auth needed)
 
-**Header:**
-- Orange gradient header with logo "एक भारत एक मंडी"
-- Language selector dropdown (8 languages)
-- "Translate" button that opens translation panel
+### Demo Flow Priority
+Focus on making THIS flow work end-to-end:
 
-**Translation Panel (THE KILLER FEATURE):**
-- Collapsible dark panel below header
-- Two text areas side by side: Input | Output
-- Language dropdowns for: From → To
-- "Translate" button (simulates translation with mock data)
-- "Voice" button (placeholder for voice input)
-- "Listen" button (placeholder for TTS)
-- Quick phrase buttons for common trading phrases
-
-**Hero Section:**
-- Title: "India's Voice-First Cross-State Trading Platform"
-- Subtitle about breaking language barriers
-- Search bar for products
-- Stats row: Languages, States, Products, Vendors
-
-**Product Grid:**
-- Show 5-6 mock products with:
-  - Product image placeholder (emoji)
-  - Product name (English + Hindi)
-  - Price per unit
-  - Location
-  - Seller name
-  - Active bids count
-  - Top bid amount
-  - "Place Bid" button
-  - "Chat" button
-
-**Footer:**
-- Simple footer with branding and challenge attribution
-
----
-
-### Page 2: Vendor Dashboard (`src/app/vendor/page.tsx`)
-
-Create a new page at `/vendor` with:
-
-**Header:**
-- Same as homepage but with "Vendor Dashboard" title
-- "Add Product" button
-
-**My Products Section:**
-- List of vendor's products
-- Each product card shows:
-  - Product name + image
-  - Current price
-  - Active bids (expandable to see details)
-  - "Edit" and "Delete" buttons
-
-**Incoming Bids Section:**
-- List of bids from buyers
-- Each bid shows:
-  - Product name
-  - Buyer name + location
-  - Bid amount
-  - Buyer's message (with translation indicator)
-  - "Accept" / "Counter" / "Reject" buttons
-
-**Add Product Modal:**
-- Form with:
-  - Product name (with translation preview)
-  - Category dropdown
-  - Quantity
-  - Price per unit
-  - Location
-  - Photo upload placeholder
-  - Submit button
-
-**Voice Negotiation Panel:**
-- Shows active negotiations
-- Voice message input
-- Auto-translation toggle
-- Message history with translations
-
----
-
-### Page 3: Buyer Dashboard (`src/app/buyer/page.tsx`)
-
-Create a new page at `/buyer` with:
-
-**Header:**
-- Same style with "Buyer Dashboard" title
-- Search bar
-
-**Browse Products:**
-- Filter by category, location, price range
-- Product grid similar to homepage but larger
-- Each product shows detailed info
-
-**My Bids Section:**
-- List of bids placed by buyer
-- Status: Pending / Accepted / Rejected / Counter-offered
-- "Edit Bid" / "Cancel Bid" buttons
-
-**Negotiation Panel:**
-- Active negotiations with vendors
-- Voice/text input with auto-translation
-- Message history
-
-**Cart / Orders Section:**
-- Won bids ready for checkout
-- Order history
-
----
-
-## MOCK DATA TO USE
-
-```typescript
-// Products
-const products = [
-  { id: 1, name: 'Organic Tomatoes', nameHi: 'जैविक टमाटर', price: 45, unit: 'kg', location: 'Chennai, TN', seller: 'Ravi Kumar', bids: 3, topBid: 48 },
-  { id: 2, name: 'Basmati Rice', nameHi: 'बासमती चावल', price: 85, unit: 'kg', location: 'Punjab', seller: 'Gurpreet Singh', bids: 5, topBid: 90 },
-  { id: 3, name: 'Silk Cocoons', nameHi: 'रेशम कोकून', price: 450, unit: 'kg', location: 'Ramanagara, KA', seller: 'Lakshmi Devi', bids: 2, topBid: 470 },
-  { id: 4, name: 'Fresh Fish', nameHi: 'ताज़ी मछली', price: 280, unit: 'kg', location: 'Kochi, KL', seller: 'Thomas Mathew', bids: 4, topBid: 300 },
-  { id: 5, name: 'Handloom Sarees', nameHi: 'हथकरघा साड़ी', price: 2500, unit: 'piece', location: 'Varanasi, UP', seller: 'Anwar Khan', bids: 1, topBid: 2600 },
-];
-
-// Languages
-const languages = [
-  { code: 'en', name: 'English', native: 'English' },
-  { code: 'hi', name: 'Hindi', native: 'हिंदी' },
-  { code: 'ta', name: 'Tamil', native: 'தமிழ்' },
-  { code: 'te', name: 'Telugu', native: 'తెలుగు' },
-  { code: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ' },
-  { code: 'bn', name: 'Bengali', native: 'বাংলা' },
-  { code: 'or', name: 'Odia', native: 'ଓଡ଼ିଆ' },
-  { code: 'ml', name: 'Malayalam', native: 'മലയാളം' },
-];
-
-// Quick translation phrases
-const quickPhrases = [
-  'आज टमाटर का भाव क्या है?',
-  'मुझे 50 किलो चावल चाहिए',
-  'What is the price?',
-  'I want to buy rice',
-];
+```
+BUYER VIEW                     SELLER VIEW
+─────────────                  ─────────────
+1. See products grid           
+2. Click "Place Bid"           
+3. Enter bid amount            
+4. Send message (translated)   
+                    ↓
+                    Switch to Seller View → See notification
+                    ↓
+                               5. See "New Bid" notification
+                               6. View bid details + translation
+                               7. Accept bid
+                    ↓
+Back to Buyer View → Bid accepted!
 ```
 
 ---
 
-## STYLING REQUIREMENTS
+## PAGE STRUCTURE
 
-**Color Scheme (STRICT):**
-- Primary: #FF9933 (Orange/Saffron)
-- Secondary: #138808 (Green)
-- Background: #FFFFFF (White)
-- Surface: #F9FAFB (Light gray)
-- Text: #1F2937 (Dark gray)
-- Text Muted: #6B7280 (Medium gray)
+### Homepage `/`
+- Product grid (6 items)
+- Category filter chips
+- Search bar
+- Each product: image, name, price, location, bids count
+- "Place Bid" button on each product
 
-**DO NOT USE:**
-- Cream backgrounds with light text
-- Complex theme switching
-- Multiple regional themes
+### Buyer Dashboard `/buyer`
+- My Bids list (shows placed bids with status)
+- Active negotiations
+- When bid is placed → appears here
+- Status updates: Pending → Accepted/Rejected
 
-**Typography:**
-- Use Inter or system fonts
-- Ensure Hindi/Tamil/etc text is readable (use Noto Sans fonts)
-- Good line height for Indian scripts
-
----
-
-## IMPLEMENTATION ORDER
-
-1. Fix globals.css to use simple high-contrast theme
-2. Simplify or remove ThemeContext complexity
-3. Build Homepage with translation panel
-4. Build Vendor Dashboard
-5. Build Buyer Dashboard
-6. Test all pages for visibility and functionality
+### Seller Dashboard `/seller`
+- My Products list
+- **Incoming Bids section** (IMPORTANT for demo)
+  - Shows new bids with notification badge
+  - Each bid shows: buyer name, amount, message (with translation)
+  - Accept / Counter / Reject buttons
+- Messages/Negotiations
 
 ---
 
-## SUCCESS CRITERIA
+## SHARED STATE (for demo)
 
-- [ ] All text is readable (no visibility issues)
-- [ ] Homepage shows products and translation works
-- [ ] Vendor dashboard shows products and bids
-- [ ] Buyer dashboard shows search and bidding
-- [ ] Navigation between pages works
-- [ ] Translation panel demonstrates the feature
-- [ ] Mobile responsive
+Create a simple shared state (React Context or Zustand) that:
+- Stores placed bids
+- When buyer places bid → it appears in seller's incoming bids
+- When seller accepts → buyer sees updated status
+
+```typescript
+// Simple shared state
+const [bids, setBids] = useState([
+  { id: 1, product: 'Tomatoes', buyer: 'Demo Buyer', amount: 48, status: 'pending', message: 'I need 50kg' }
+]);
+
+// Buyer places bid → add to bids
+// Seller accepts → update status to 'accepted'
+```
 
 ---
 
-## REMEMBER
+## TRANSLATION FEATURE
 
-This is a 24-hour hackathon. Focus on:
-1. **Demo-ability** — Make it look functional and impressive
-2. **The killer feature** — Translation panel that actually "translates" (mock is fine)
-3. **Clean design** — High contrast, professional look
-4. **Working navigation** — All pages accessible
+### Translation Panel
+- Show on homepage (collapsible)
+- Input → Output with language selectors
+- Quick phrases for trading
+- Voice button (placeholder icon, doesn't need to work)
+
+### In-Message Translation
+- When buyer sends Hindi message, seller sees:
+  - Original: "मुझे 50 किलो चाहिए"
+  - Translated: "I need 50 kg"
+- Mock translation is fine
+
+---
+
+## UI ELEMENTS NEEDED
+
+### Navigation Bar
+```
+[Logo] Ek Bharath Ek Mandi    [Browse] [Seller] [Buyer]    [Language ▼]
+```
+
+### Product Card
+```
+┌─────────────────────┐
+│  [Product Image]    │
+│  Tomatoes           │
+│  📍 Chennai         │
+│  ₹45/kg            │
+│  3 bids • Top: ₹48  │
+│  [Place Bid]        │
+└─────────────────────┘
+```
+
+### Bid Notification (Seller View)
+```
+┌─────────────────────────────────────┐
+│ 🔔 New Bid on Tomatoes              │
+│ Buyer: Raj (Delhi)   Amount: ₹48/kg │
+│ Message: "मुझे 50 किलो चाहिए"       │
+│ Translation: "I need 50 kg"         │
+│ [Accept] [Counter] [Reject]         │
+└─────────────────────────────────────┘
+```
+
+---
+
+## MOCK PROFILES
+
+### Seller Profile (shown in seller dashboard)
+```
+👨‍🌾 Ravi Kumar
+📍 Chennai, Tamil Nadu
+⭐ 4.8 rating
+Products: 12 active listings
+```
+
+### Buyer Profile (shown when placing bid)
+```
+🛒 Demo Buyer
+📍 Delhi
+"Looking for quality produce for my restaurant"
+```
+
+---
+
+## WHAT TO BUILD (Priority Order)
+
+1. **Fix any visibility issues** (text readable)
+2. **Navigation** between /, /seller, /buyer
+3. **Homepage** with product grid + bid functionality
+4. **Seller Dashboard** with incoming bids + accept/reject
+5. **Buyer Dashboard** with my bids + status
+6. **Translation panel** on homepage
+7. **Language switching** that changes all text
+
+---
+
+## i18n Example (make sure this works)
+
+```typescript
+// When language = 'ta' (Tamil)
+t('common.products') → "பொருட்கள்"
+t('common.placeBid') → "ஏலம் இடுங்கள்"
+t('common.accept') → "ஏற்றுக்கொள்"
+```
+
+---
+
+## SUCCESS = DEMO WORKS
+
+Evaluator should be able to:
+- [ ] Browse products
+- [ ] Place a bid (with message)
+- [ ] Switch to seller view
+- [ ] See the bid notification
+- [ ] Accept the bid
+- [ ] Switch language → see UI change
+- [ ] Use translation panel
+
+**Ship something that works, not something perfect!**

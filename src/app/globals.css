@@ -150,8 +150,11 @@
 }
 
 .script-tamil {
-  --font-family: 'Noto Sans Tamil', 'Latha', 'Vijaya', system-ui, sans-serif;
+  --font-family: 'Noto Sans Tamil', 'Latha', 'Vijaya', 'Tamil Sangam MN', system-ui, sans-serif;
   font-family: var(--font-family);
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
 }
 
 .script-telugu {

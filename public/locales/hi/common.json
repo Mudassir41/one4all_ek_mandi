@@ -104,7 +104,11 @@
     "rejectBid": "बोली अस्वीकार करें",
     "counterOffer": "प्रति प्रस्ताव",
     "directPurchase": "सीधी खरीदारी",
-    "buyNow": "अभी खरीदें"
+    "buyNow": "अभी खरीदें",
+    "newBid": "नई बोली",
+    "bidAccepted": "बोली स्वीकार की गई",
+    "bidRejected": "बोली अस्वीकार की गई",
+    "bidPending": "बोली लंबित"
   },
   "chat": {
     "startChat": "चैट शुरू करें",

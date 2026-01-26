@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { I18nProvider } from "@/contexts/I18nContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { BiddingProvider } from "@/contexts/BiddingContext";
 import { ClientI18nInitializer } from "@/components/ClientI18nInitializer";
 
 const inter = Inter({
@@ -36,16 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="theme-indian">
       <head>
-        {/* Preload critical fonts */}
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Load Indian language fonts */}
         <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
-          as="style"
-        />
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap"
-          as="style"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Sans+Oriya:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
         />
         {/* Language alternates for SEO */}
         <link rel="alternate" hrefLang="en" href="/" />
@@ -64,7 +61,9 @@ export default function RootLayout({
         <ClientI18nInitializer />
         <I18nProvider>
           <ThemeProvider>
-            {children}
+            <BiddingProvider>
+              {children}
+            </BiddingProvider>
           </ThemeProvider>
         </I18nProvider>
       </body>

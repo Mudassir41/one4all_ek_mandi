@@ -55,8 +55,10 @@ export const useVoiceRecording = (options: VoiceRecordingOptions = {}) => {
   // Check browser compatibility
   const isWebRTCSupported = useCallback(() => {
     return !!(
+      typeof navigator !== 'undefined' &&
       navigator.mediaDevices &&
       navigator.mediaDevices.getUserMedia &&
+      typeof window !== 'undefined' &&
       window.MediaRecorder
     );
   }, []);

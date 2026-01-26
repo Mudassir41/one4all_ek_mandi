@@ -6,13 +6,13 @@ import { renderHook, act } from '@testing-library/react';
 import { usePhotoCapture } from '../usePhotoCapture';
 
 // Mock dependencies
-jest.mock('../lib/image-utils', () => ({
+jest.mock('../../lib/image-utils', () => ({
   processPhoto: jest.fn(),
   validateImageFile: jest.fn(() => ({ valid: true })),
   formatFileSize: jest.fn((size) => `${size} bytes`)
 }));
 
-jest.mock('../lib/indexeddb-utils', () => ({
+jest.mock('../../lib/indexeddb-utils', () => ({
   storePhoto: jest.fn(),
   getUserPhotos: jest.fn(() => Promise.resolve([])),
   deletePhoto: jest.fn(),
@@ -29,7 +29,7 @@ jest.mock('../lib/indexeddb-utils', () => ({
   }))
 }));
 
-jest.mock('../lib/photo-sync', () => ({
+jest.mock('../../lib/photo-sync', () => ({
   startPhotoSync: jest.fn(),
   getSyncStatus: jest.fn(() => Promise.resolve({
     inProgress: false,
@@ -175,8 +175,8 @@ describe('usePhotoCapture', () => {
   });
 
   it('should handle file upload', async () => {
-    const { processPhoto } = require('../lib/image-utils');
-    const { storePhoto } = require('../lib/indexeddb-utils');
+    const { processPhoto } = require('../../lib/image-utils');
+    const { storePhoto } = require('../../lib/indexeddb-utils');
 
     const mockPhoto = {
       id: 'photo-1',
@@ -216,7 +216,7 @@ describe('usePhotoCapture', () => {
   });
 
   it('should handle photo deletion', async () => {
-    const { deletePhoto } = require('../lib/indexeddb-utils');
+    const { deletePhoto } = require('../../lib/indexeddb-utils');
     const { result } = renderHook(() => usePhotoCapture(defaultOptions));
 
     await act(async () => {
@@ -227,7 +227,7 @@ describe('usePhotoCapture', () => {
   });
 
   it('should handle sync operations', async () => {
-    const { startPhotoSync } = require('../lib/photo-sync');
+    const { startPhotoSync } = require('../../lib/photo-sync');
     const { result } = renderHook(() => usePhotoCapture(defaultOptions));
 
     await act(async () => {
@@ -284,7 +284,7 @@ describe('usePhotoCapture', () => {
     result.current.canvasRef.current = mockCanvas as any;
     result.current.videoRef.current = mockVideo as any;
 
-    const { processPhoto } = require('../lib/image-utils');
+    const { processPhoto } = require('../../lib/image-utils');
     processPhoto.mockResolvedValue({
       success: true,
       photo: mockPhoto

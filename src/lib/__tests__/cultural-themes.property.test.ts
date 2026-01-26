@@ -30,7 +30,9 @@ const validColorArbitrary = fc.oneof(
   fc.constant('#000080'), // Navy
   fc.constant('#FFFFFF'), // White
   fc.constant('#000000'), // Black
-  fc.hexaString({ minLength: 6, maxLength: 6 }).map(s => `#${s}`)
+  fc.string({ minLength: 6, maxLength: 6 })
+    .filter(s => /^[0-9A-Fa-f]{6}$/.test(s))
+    .map(s => `#${s}`)
 );
 
 const regionArbitrary = fc.oneof(

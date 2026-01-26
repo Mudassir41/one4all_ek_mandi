@@ -104,7 +104,11 @@
     "rejectBid": "Reject Bid",
     "counterOffer": "Counter Offer",
     "directPurchase": "Direct Purchase",
-    "buyNow": "Buy Now"
+    "buyNow": "Buy Now",
+    "newBid": "New Bid",
+    "bidAccepted": "Bid Accepted",
+    "bidRejected": "Bid Rejected",
+    "bidPending": "Bid Pending"
   },
   "chat": {
     "startChat": "Start Chat",
