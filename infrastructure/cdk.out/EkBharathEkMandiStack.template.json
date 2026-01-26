@@ -1,0 +1,5590 @@
+{
+ "Description": "Ek Bharath Ek Mandi - Voice-First Cross-State Trading Platform Infrastructure",
+ "Resources": {
+  "UsersTable9725E9C8": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "phone",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "state",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "district",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "user_type",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "PhoneIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "phone",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "LocationIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "state",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "district",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "UserTypeIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "user_type",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "TableName": "ek-bharath-users",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/UsersTable/Resource"
+   }
+  },
+  "ProductsTable241ADBFF": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "category",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "state",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "vendor_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "status",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "price_sort_key",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "CategoryIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "category",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "LocationIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "state",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "VendorIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "vendor_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "StatusIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "status",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "PriceIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "category",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "price_sort_key",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "TableName": "ek-bharath-products",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/ProductsTable/Resource"
+   }
+  },
+  "BidsTableE1AD1632": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "buyer_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "status",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "buyer_type",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "vendor_id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "BuyerIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "buyer_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "StatusIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "status",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "BuyerTypeIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "buyer_type",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "VendorBidsIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "vendor_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "TableName": "ek-bharath-bids",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/BidsTable/Resource"
+   }
+  },
+  "ConversationsTableCD91EB96": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "sender_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "recipient_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "read_status",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "source_lang",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "target_lang",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "UserIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "sender_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "RecipientIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "recipient_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "UnreadIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "recipient_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "read_status",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "LanguageIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "source_lang",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "target_lang",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "KEYS_ONLY"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "TableName": "ek-bharath-conversations",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "TimeToLiveSpecification": {
+     "AttributeName": "ttl",
+     "Enabled": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/ConversationsTable/Resource"
+   }
+  },
+  "PriceHistoryTable5AD3E5A9": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "product_category",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "date",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "state",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "ProductIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "product_category",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "date",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "StateIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "state",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "date",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "TableName": "ek-bharath-price-history",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/PriceHistoryTable/Resource"
+   }
+  },
+  "TranslationCacheTable12FAE693": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "source_lang",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "target_lang",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "LanguagePairIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "source_lang",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "target_lang",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "TableName": "ek-bharath-translation-cache",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "TimeToLiveSpecification": {
+     "AttributeName": "ttl",
+     "Enabled": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/TranslationCacheTable/Resource"
+   }
+  },
+  "UserSessionsTable6F92E803": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "user_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "last_activity",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "UserIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "user_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "last_activity",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "TableName": "ek-bharath-user-sessions",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "TimeToLiveSpecification": {
+     "AttributeName": "ttl",
+     "Enabled": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/UserSessionsTable/Resource"
+   }
+  },
+  "MediaBucketNotificationRole0EC6C809": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "s3.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaBucketNotificationRole/Resource"
+   }
+  },
+  "MediaBucketNotificationRoleDefaultPolicyC83FFBD0": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:PutBucketNotification",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MediaBucketNotificationRoleDefaultPolicyC83FFBD0",
+    "Roles": [
+     {
+      "Ref": "MediaBucketNotificationRole0EC6C809"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaBucketNotificationRole/DefaultPolicy/Resource"
+   }
+  },
+  "MediaBucketBCBB02BA": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "BucketName": {
+     "Fn::Join": [
+      "",
+      [
+       "ek-bharath-media-",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       "-us-east-1"
+      ]
+     ]
+    },
+    "CorsConfiguration": {
+     "CorsRules": [
+      {
+       "AllowedHeaders": [
+        "Content-Type",
+        "Content-Length",
+        "Authorization",
+        "X-Amz-Date",
+        "X-Api-Key",
+        "X-Amz-Security-Token",
+        "x-amz-content-sha256",
+        "x-amz-user-agent"
+       ],
+       "AllowedMethods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+       ],
+       "AllowedOrigins": [
+        "https://localhost:3000",
+        "https://*.ek-bharath.com",
+        "https://*.amazonaws.com"
+       ],
+       "ExposedHeaders": [
+        "ETag"
+       ],
+       "MaxAge": 3600
+      }
+     ]
+    },
+    "LifecycleConfiguration": {
+     "Rules": [
+      {
+       "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 1
+       },
+       "Id": "DeleteIncompleteMultipartUploads",
+       "Status": "Enabled"
+      },
+      {
+       "Id": "TransitionToIA",
+       "Status": "Enabled",
+       "Transitions": [
+        {
+         "StorageClass": "STANDARD_IA",
+         "TransitionInDays": 30
+        },
+        {
+         "StorageClass": "GLACIER",
+         "TransitionInDays": 90
+        }
+       ]
+      },
+      {
+       "Id": "DeleteOldVersions",
+       "NoncurrentVersionExpiration": {
+        "NoncurrentDays": 30
+       },
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaBucket/Resource"
+   }
+  },
+  "MediaBucketPolicy68C27F6B": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "MediaBucketBCBB02BA"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "MediaBucketBCBB02BA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "MediaBucketBCBB02BA",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "MediaBucketBCBB02BA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "MediaBucketBCBB02BA",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ],
+       "Sid": "DenyInsecureConnections"
+      },
+      {
+       "Action": "s3:GetObject",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "MediaBucketBCBB02BA",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       },
+       "Sid": "AllowCloudFrontAccess"
+      },
+      {
+       "Action": "s3:GetObject",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":cloudfront::",
+            {
+             "Ref": "AWS::AccountId"
+            },
+            ":distribution/",
+            {
+             "Ref": "CDNDistribution7A549351"
+            }
+           ]
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "MediaBucketBCBB02BA",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaBucket/Policy/Resource"
+   }
+  },
+  "MediaBucketNotifications36AC1320": {
+   "Type": "Custom::S3BucketNotifications",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "MediaBucketBCBB02BA"
+    },
+    "NotificationConfiguration": {
+     "LambdaFunctionConfigurations": [
+      {
+       "Events": [
+        "s3:ObjectCreated:*"
+       ],
+       "Filter": {
+        "Key": {
+         "FilterRules": [
+          {
+           "Name": "prefix",
+           "Value": "uploads/"
+          }
+         ]
+        }
+       },
+       "LambdaFunctionArn": {
+        "Fn::GetAtt": [
+         "MediaProcessorFunction0D91AEA9",
+         "Arn"
+        ]
+       }
+      }
+     ]
+    },
+    "Managed": true,
+    "SkipDestinationValidation": false
+   },
+   "DependsOn": [
+    "MediaBucketAllowBucketNotificationsToEkBharathEkMandiStackMediaProcessorFunctionB1875FFA6EDA477C",
+    "MediaBucketPolicy68C27F6B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaBucket/Notifications/Resource"
+   }
+  },
+  "MediaBucketAllowBucketNotificationsToEkBharathEkMandiStackMediaProcessorFunctionB1875FFA6EDA477C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "MediaProcessorFunction0D91AEA9",
+      "Arn"
+     ]
+    },
+    "Principal": "s3.amazonaws.com",
+    "SourceAccount": {
+     "Ref": "AWS::AccountId"
+    },
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "MediaBucketBCBB02BA",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaBucket/AllowBucketNotificationsToEkBharathEkMandiStackMediaProcessorFunctionB1875FFA"
+   }
+  },
+  "VoiceBucket529D37EA": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "BucketName": {
+     "Fn::Join": [
+      "",
+      [
+       "ek-bharath-voice-",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       "-us-east-1"
+      ]
+     ]
+    },
+    "CorsConfiguration": {
+     "CorsRules": [
+      {
+       "AllowedHeaders": [
+        "Content-Type",
+        "Content-Length",
+        "Authorization",
+        "X-Amz-Date",
+        "X-Api-Key",
+        "X-Amz-Security-Token",
+        "x-amz-content-sha256",
+        "x-amz-user-agent"
+       ],
+       "AllowedMethods": [
+        "GET",
+        "POST",
+        "PUT"
+       ],
+       "AllowedOrigins": [
+        "https://localhost:3000",
+        "https://*.ek-bharath.com",
+        "https://*.amazonaws.com"
+       ],
+       "ExposedHeaders": [
+        "ETag"
+       ],
+       "MaxAge": 1800
+      }
+     ]
+    },
+    "LifecycleConfiguration": {
+     "Rules": [
+      {
+       "ExpirationInDays": 30,
+       "Id": "DeleteVoiceFiles",
+       "Status": "Enabled"
+      },
+      {
+       "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 1
+       },
+       "Id": "DeleteIncompleteMultipartUploads",
+       "Status": "Enabled"
+      },
+      {
+       "Id": "DeleteOldVersions",
+       "NoncurrentVersionExpiration": {
+        "NoncurrentDays": 1
+       },
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "OwnershipControls": {
+     "Rules": [
+      {
+       "ObjectOwnership": "BucketOwnerEnforced"
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceBucket/Resource"
+   }
+  },
+  "VoiceBucketPolicy90AEA77B": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "VoiceBucket529D37EA"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "VoiceBucket529D37EA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "VoiceBucket529D37EA",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "VoiceBucket529D37EA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "VoiceBucket529D37EA",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ],
+       "Sid": "DenyInsecureConnections"
+      },
+      {
+       "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+       ],
+       "Condition": {
+        "StringNotEquals": {
+         "aws:PrincipalServiceName": [
+          "lambda.amazonaws.com",
+          "transcribe.amazonaws.com",
+          "polly.amazonaws.com"
+         ]
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "VoiceBucket529D37EA",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       },
+       "Sid": "DenyPublicAccess"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceBucket/Policy/Resource"
+   }
+  },
+  "VoiceBucketNotificationsE5B3ACFE": {
+   "Type": "Custom::S3BucketNotifications",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "VoiceBucket529D37EA"
+    },
+    "NotificationConfiguration": {
+     "LambdaFunctionConfigurations": [
+      {
+       "Events": [
+        "s3:ObjectCreated:*"
+       ],
+       "LambdaFunctionArn": {
+        "Fn::GetAtt": [
+         "VoiceProcessorFunction11F26011",
+         "Arn"
+        ]
+       }
+      }
+     ]
+    },
+    "Managed": true,
+    "SkipDestinationValidation": false
+   },
+   "DependsOn": [
+    "VoiceBucketAllowBucketNotificationsToEkBharathEkMandiStackVoiceProcessorFunctionC9C7CCB8113BEB3A",
+    "VoiceBucketPolicy90AEA77B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceBucket/Notifications/Resource"
+   }
+  },
+  "VoiceBucketAllowBucketNotificationsToEkBharathEkMandiStackVoiceProcessorFunctionC9C7CCB8113BEB3A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "VoiceProcessorFunction11F26011",
+      "Arn"
+     ]
+    },
+    "Principal": "s3.amazonaws.com",
+    "SourceAccount": {
+     "Ref": "AWS::AccountId"
+    },
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "VoiceBucket529D37EA",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceBucket/AllowBucketNotificationsToEkBharathEkMandiStackVoiceProcessorFunctionC9C7CCB8"
+   }
+  },
+  "MediaProcessorFunctionServiceRoleCEDE1406": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaProcessorFunction/ServiceRole/Resource"
+   }
+  },
+  "MediaProcessorFunctionServiceRoleDefaultPolicy035FB8FC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "MediaBucketBCBB02BA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "MediaBucketBCBB02BA",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ProductsTable241ADBFF",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ProductsTable241ADBFF",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MediaProcessorFunctionServiceRoleDefaultPolicy035FB8FC",
+    "Roles": [
+     {
+      "Ref": "MediaProcessorFunctionServiceRoleCEDE1406"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaProcessorFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "MediaProcessorFunction0D91AEA9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        const AWS = require('aws-sdk');\n        const sharp = require('sharp');\n        \n        exports.handler = async (event) => {\n          console.log('Processing media upload:', JSON.stringify(event, null, 2));\n          \n          for (const record of event.Records) {\n            if (record.eventName.startsWith('ObjectCreated')) {\n              const bucket = record.s3.bucket.name;\n              const key = record.s3.object.key;\n              \n              // Process image files\n              if (key.match(/\\.(jpg|jpeg|png|webp)$/i)) {\n                await processImage(bucket, key);\n              }\n              \n              // Update search index\n              await updateSearchIndex(bucket, key);\n            }\n          }\n          \n          return { statusCode: 200, body: 'Processing complete' };\n        };\n        \n        async function processImage(bucket, key) {\n          // Image optimization logic will be implemented here\n          console.log(`Processing image: ${bucket}/${key}`);\n        }\n        \n        async function updateSearchIndex(bucket, key) {\n          // Search index update logic will be implemented here\n          console.log(`Updating search index for: ${bucket}/${key}`);\n        }\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "MEDIA_BUCKET": {
+       "Ref": "MediaBucketBCBB02BA"
+      },
+      "PRODUCTS_TABLE": {
+       "Ref": "ProductsTable241ADBFF"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "MemorySize": 1024,
+    "Role": {
+     "Fn::GetAtt": [
+      "MediaProcessorFunctionServiceRoleCEDE1406",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "MediaProcessorFunctionServiceRoleDefaultPolicy035FB8FC",
+    "MediaProcessorFunctionServiceRoleCEDE1406"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/MediaProcessorFunction/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Description": "AWS CloudFormation handler for \"Custom::S3BucketNotifications\" resources (@aws-cdk/aws-s3)",
+    "Code": {
+     "ZipFile": "import boto3  # type: ignore\nimport json\nimport logging\nimport urllib.request\n\ns3 = boto3.client(\"s3\")\n\nEVENTBRIDGE_CONFIGURATION = 'EventBridgeConfiguration'\nCONFIGURATION_TYPES = [\"TopicConfigurations\", \"QueueConfigurations\", \"LambdaFunctionConfigurations\"]\n\ndef handler(event: dict, context):\n  response_status = \"SUCCESS\"\n  error_message = \"\"\n  try:\n    props = event[\"ResourceProperties\"]\n    notification_configuration = props[\"NotificationConfiguration\"]\n    managed = props.get('Managed', 'true').lower() == 'true'\n    skipDestinationValidation = props.get('SkipDestinationValidation', 'false').lower() == 'true'\n    stack_id = event['StackId']\n    old = event.get(\"OldResourceProperties\", {}).get(\"NotificationConfiguration\", {})\n    if managed:\n      config = handle_managed(event[\"RequestType\"], notification_configuration)\n    else:\n      config = handle_unmanaged(props[\"BucketName\"], stack_id, event[\"RequestType\"], notification_configuration, old)\n    s3.put_bucket_notification_configuration(Bucket=props[\"BucketName\"], NotificationConfiguration=config, SkipDestinationValidation=skipDestinationValidation)\n  except Exception as e:\n    logging.exception(\"Failed to put bucket notification configuration\")\n    response_status = \"FAILED\"\n    error_message = f\"Error: {str(e)}. \"\n  finally:\n    submit_response(event, context, response_status, error_message)\n\ndef handle_managed(request_type, notification_configuration):\n  if request_type == 'Delete':\n    return {}\n  return notification_configuration\n\ndef handle_unmanaged(bucket, stack_id, request_type, notification_configuration, old):\n  def get_id(n):\n    n['Id'] = ''\n    strToHash=json.dumps(n, sort_keys=True).replace('\"Name\": \"prefix\"', '\"Name\": \"Prefix\"').replace('\"Name\": \"suffix\"', '\"Name\": \"Suffix\"')\n    return f\"{stack_id}-{hash(strToHash)}\"\n  def with_id(n):\n    n['Id'] = get_id(n)\n    return n\n\n  external_notifications = {}\n  existing_notifications = s3.get_bucket_notification_configuration(Bucket=bucket)\n  for t in CONFIGURATION_TYPES:\n    if request_type == 'Update':\n        old_incoming_ids = [get_id(n) for n in old.get(t, [])]\n        external_notifications[t] = [n for n in existing_notifications.get(t, []) if not get_id(n) in old_incoming_ids]      \n    elif request_type == 'Delete':\n        external_notifications[t] = [n for n in existing_notifications.get(t, []) if not n['Id'].startswith(f\"{stack_id}-\")]\n    elif request_type == 'Create':\n        external_notifications[t] = [n for n in existing_notifications.get(t, [])]\n  if EVENTBRIDGE_CONFIGURATION in existing_notifications:\n    external_notifications[EVENTBRIDGE_CONFIGURATION] = existing_notifications[EVENTBRIDGE_CONFIGURATION]\n\n  if request_type == 'Delete':\n    return external_notifications\n\n  notifications = {}\n  for t in CONFIGURATION_TYPES:\n    external = external_notifications.get(t, [])\n    incoming = [with_id(n) for n in notification_configuration.get(t, [])]\n    notifications[t] = external + incoming\n\n  if EVENTBRIDGE_CONFIGURATION in notification_configuration:\n    notifications[EVENTBRIDGE_CONFIGURATION] = notification_configuration[EVENTBRIDGE_CONFIGURATION]\n  elif EVENTBRIDGE_CONFIGURATION in external_notifications:\n    notifications[EVENTBRIDGE_CONFIGURATION] = external_notifications[EVENTBRIDGE_CONFIGURATION]\n\n  return notifications\n\ndef submit_response(event: dict, context, response_status: str, error_message: str):\n  response_body = json.dumps(\n    {\n      \"Status\": response_status,\n      \"Reason\": f\"{error_message}See the details in CloudWatch Log Stream: {context.log_stream_name}\",\n      \"PhysicalResourceId\": event.get(\"PhysicalResourceId\") or event[\"LogicalResourceId\"],\n      \"StackId\": event[\"StackId\"],\n      \"RequestId\": event[\"RequestId\"],\n      \"LogicalResourceId\": event[\"LogicalResourceId\"],\n      \"NoEcho\": False,\n    }\n  ).encode(\"utf-8\")\n  headers = {\"content-type\": \"\", \"content-length\": str(len(response_body))}\n  try:\n    req = urllib.request.Request(url=event[\"ResponseURL\"], headers=headers, data=response_body, method=\"PUT\")\n    with urllib.request.urlopen(req) as response:\n      print(response.read().decode(\"utf-8\"))\n    print(\"Status code: \" + response.reason)\n  except Exception as e:\n      print(\"send(..) failed executing request.urlopen(..): \" + str(e))"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "MediaBucketNotificationRole0EC6C809",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.11",
+    "Timeout": 300,
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MediaBucketNotificationRoleDefaultPolicyC83FFBD0",
+    "MediaBucketNotificationRole0EC6C809"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource"
+   }
+  },
+  "VoiceProcessorFunctionServiceRoleA5C8561F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceProcessorFunction/ServiceRole/Resource"
+   }
+  },
+  "VoiceProcessorFunctionServiceRoleDefaultPolicy33E422DC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "VoiceBucket529D37EA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "VoiceBucket529D37EA",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ConversationsTableCD91EB96",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ConversationsTableCD91EB96",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "VoiceProcessorFunctionServiceRoleDefaultPolicy33E422DC",
+    "Roles": [
+     {
+      "Ref": "VoiceProcessorFunctionServiceRoleA5C8561F"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceProcessorFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "VoiceProcessorFunction11F26011": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        exports.handler = async (event) => {\n          console.log('Processing voice upload:', JSON.stringify(event, null, 2));\n          \n          for (const record of event.Records) {\n            if (record.eventName.startsWith('ObjectCreated')) {\n              const bucket = record.s3.bucket.name;\n              const key = record.s3.object.key;\n              \n              // Trigger transcription for voice files\n              if (key.match(/\\.(mp3|wav|m4a|ogg)$/i)) {\n                await triggerTranscription(bucket, key);\n              }\n            }\n          }\n          \n          return { statusCode: 200, body: 'Voice processing initiated' };\n        };\n        \n        async function triggerTranscription(bucket, key) {\n          // Transcription logic will be implemented here\n          console.log(`Triggering transcription for: ${bucket}/${key}`);\n        }\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "VOICE_BUCKET": {
+       "Ref": "VoiceBucket529D37EA"
+      },
+      "CONVERSATIONS_TABLE": {
+       "Ref": "ConversationsTableCD91EB96"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "VoiceProcessorFunctionServiceRoleA5C8561F",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "VoiceProcessorFunctionServiceRoleDefaultPolicy33E422DC",
+    "VoiceProcessorFunctionServiceRoleA5C8561F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/VoiceProcessorFunction/Resource"
+   }
+  },
+  "CacheSubnetGroup": {
+   "Type": "AWS::ElastiCache::SubnetGroup",
+   "Properties": {
+    "Description": "Subnet group for ElastiCache",
+    "SubnetIds": [
+     "subnet-12345"
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/CacheSubnetGroup"
+   }
+  },
+  "RedisCache": {
+   "Type": "AWS::ElastiCache::CacheCluster",
+   "Properties": {
+    "CacheNodeType": "cache.t3.micro",
+    "CacheSubnetGroupName": {
+     "Ref": "CacheSubnetGroup"
+    },
+    "Engine": "redis",
+    "NumCacheNodes": 1,
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Name",
+      "Value": "ek-bharath-redis-cache"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     },
+     {
+      "Key": "Purpose",
+      "Value": "Translation and Search Caching"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/RedisCache"
+   }
+  },
+  "SearchDomainSlowSearchLogs9C65C1B4": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/SearchDomain/SlowSearchLogs/Resource"
+   }
+  },
+  "SearchDomainSlowIndexLogs510CC4BC": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/SearchDomain/SlowIndexLogs/Resource"
+   }
+  },
+  "SearchDomainAppLogs546C26E7": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/SearchDomain/AppLogs/Resource"
+   }
+  },
+  "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f94C9E8C1": {
+   "Type": "Custom::CloudwatchLogResourcePolicy",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"CloudWatchLogs\",\"action\":\"putResourcePolicy\",\"parameters\":{\"policyName\":\"ESLogPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f\",\"policyDocument\":\"{\\\"Statement\\\":[{\\\"Action\\\":[\\\"logs:PutLogEvents\\\",\\\"logs:CreateLogStream\\\"],\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":{\\\"Service\\\":\\\"es.amazonaws.com\\\"},\\\"Resource\\\":[\\\"",
+       {
+        "Fn::GetAtt": [
+         "SearchDomainSlowSearchLogs9C65C1B4",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "SearchDomainSlowIndexLogs510CC4BC",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "SearchDomainAppLogs546C26E7",
+         "Arn"
+        ]
+       },
+       "\\\"]}],\\\"Version\\\":\\\"2012-10-17\\\"}\"},\"physicalResourceId\":{\"id\":\"ESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"CloudWatchLogs\",\"action\":\"putResourcePolicy\",\"parameters\":{\"policyName\":\"ESLogPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f\",\"policyDocument\":\"{\\\"Statement\\\":[{\\\"Action\\\":[\\\"logs:PutLogEvents\\\",\\\"logs:CreateLogStream\\\"],\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":{\\\"Service\\\":\\\"es.amazonaws.com\\\"},\\\"Resource\\\":[\\\"",
+       {
+        "Fn::GetAtt": [
+         "SearchDomainSlowSearchLogs9C65C1B4",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "SearchDomainSlowIndexLogs510CC4BC",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "SearchDomainAppLogs546C26E7",
+         "Arn"
+        ]
+       },
+       "\\\"]}],\\\"Version\\\":\\\"2012-10-17\\\"}\"},\"physicalResourceId\":{\"id\":\"ESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f\"}}"
+      ]
+     ]
+    },
+    "Delete": "{\"service\":\"CloudWatchLogs\",\"action\":\"deleteResourcePolicy\",\"parameters\":{\"policyName\":\"ESLogPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f\"},\"ignoreErrorCodesMatching\":\"ResourceNotFoundException\"}",
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97fCustomResourcePolicy29315707"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/SearchDomain/ESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f/Resource/Default"
+   }
+  },
+  "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97fCustomResourcePolicy29315707": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:DeleteResourcePolicy",
+        "logs:PutResourcePolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97fCustomResourcePolicy29315707",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/SearchDomain/ESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f/CustomResourcePolicy/Resource"
+   }
+  },
+  "SearchDomainFDC494A0": {
+   "Type": "AWS::OpenSearchService::Domain",
+   "Properties": {
+    "ClusterConfig": {
+     "DedicatedMasterEnabled": false,
+     "InstanceCount": 1,
+     "InstanceType": "t3.small.search",
+     "MultiAZWithStandbyEnabled": false,
+     "ZoneAwarenessEnabled": false
+    },
+    "DomainEndpointOptions": {
+     "EnforceHTTPS": true,
+     "TLSSecurityPolicy": "Policy-Min-TLS-1-0-2019-07"
+    },
+    "EBSOptions": {
+     "EBSEnabled": true,
+     "VolumeSize": 20,
+     "VolumeType": "gp3"
+    },
+    "EncryptionAtRestOptions": {
+     "Enabled": true
+    },
+    "EngineVersion": "OpenSearch_2.11",
+    "LogPublishingOptions": {
+     "SEARCH_SLOW_LOGS": {
+      "CloudWatchLogsLogGroupArn": {
+       "Fn::GetAtt": [
+        "SearchDomainSlowSearchLogs9C65C1B4",
+        "Arn"
+       ]
+      },
+      "Enabled": true
+     },
+     "INDEX_SLOW_LOGS": {
+      "CloudWatchLogsLogGroupArn": {
+       "Fn::GetAtt": [
+        "SearchDomainSlowIndexLogs510CC4BC",
+        "Arn"
+       ]
+      },
+      "Enabled": true
+     },
+     "ES_APPLICATION_LOGS": {
+      "CloudWatchLogsLogGroupArn": {
+       "Fn::GetAtt": [
+        "SearchDomainAppLogs546C26E7",
+        "Arn"
+       ]
+      },
+      "Enabled": true
+     }
+    },
+    "NodeToNodeEncryptionOptions": {
+     "Enabled": true
+    },
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97fCustomResourcePolicy29315707",
+    "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f94C9E8C1"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/SearchDomain/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+     },
+     "S3Key": "1b76a89c99861d4099552c5b48e16daafabc13fd66f42ccdcef246972442caf6.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+    "aws:asset:path": "asset.1b76a89c99861d4099552c5b48e16daafabc13fd66f42ccdcef246972442caf6",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "UserPoolsmsRole4EA729DD": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "sts:ExternalId": "EkBharathEkMandiStackUserPool348F7300"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cognito-idp.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": "sns:Publish",
+         "Effect": "Allow",
+         "Resource": "*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "sns-publish"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/UserPool/smsRole/Resource"
+   }
+  },
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": true
+    },
+    "AutoVerifiedAttributes": [
+     "phone_number"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "EnabledMfas": [
+     "SMS_MFA"
+    ],
+    "MfaConfiguration": "OPTIONAL",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": false,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": false
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": true,
+      "Name": "phone_number",
+      "Required": true
+     },
+     {
+      "Mutable": true,
+      "Name": "preferred_username",
+      "Required": false
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "user_type"
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "languages"
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "state"
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "district"
+     }
+    ],
+    "SmsConfiguration": {
+     "ExternalId": "EkBharathEkMandiStackUserPool348F7300",
+     "SnsCallerArn": {
+      "Fn::GetAtt": [
+       "UserPoolsmsRole4EA729DD",
+       "Arn"
+      ]
+     }
+    },
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "ek-bharath-users",
+    "UserPoolTags": {
+     "Environment": "development",
+     "Owner": "EkBharathEkMandi-Team",
+     "Project": "EkBharathEkMandi"
+    },
+    "UsernameAttributes": [
+     "phone_number"
+    ],
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/UserPool/Resource"
+   }
+  },
+  "UserPoolClient2F5918F7": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AllowedOAuthFlows": [
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "openid",
+     "profile",
+     "phone"
+    ],
+    "CallbackURLs": [
+     "https://example.com"
+    ],
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_CUSTOM_AUTH",
+     "ALLOW_USER_SRP_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/UserPoolClient/Resource"
+   }
+  },
+  "EkBharathApi5D9D1F7B": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "BinaryMediaTypes": [
+     "audio/*",
+     "image/*"
+    ],
+    "Description": "API for Ek Bharath Ek Mandi platform",
+    "Name": "Ek Bharath Ek Mandi API",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Resource"
+   }
+  },
+  "EkBharathApiCloudWatchRoleAE0F6FDB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/CloudWatchRole/Resource"
+   }
+  },
+  "EkBharathApiAccountD462C83D": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "EkBharathApiCloudWatchRoleAE0F6FDB",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "EkBharathApi5D9D1F7B"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Account"
+   }
+  },
+  "EkBharathApiDeployment2A9A8D2E97dbd34888a2cda2f63af5d63f241b61": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "API for Ek Bharath Ek Mandi platform",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "DependsOn": [
+    "EkBharathApiOPTIONSCFE9D8E3",
+    "EkBharathApiv1authloginOPTIONSC37F31B4",
+    "EkBharathApiv1authloginPOSTBAA8C298",
+    "EkBharathApiv1authloginA30C97B3",
+    "EkBharathApiv1authOPTIONSD65E5228",
+    "EkBharathApiv1authregisterOPTIONSE58FB547",
+    "EkBharathApiv1authregisterPOST3E8068A6",
+    "EkBharathApiv1authregister56CB8437",
+    "EkBharathApiv1authDE241AEC",
+    "EkBharathApiv1authverifyOPTIONSEC77BB56",
+    "EkBharathApiv1authverifyC3A79A67",
+    "EkBharathApiv1bidsbidIdOPTIONS9851EE21",
+    "EkBharathApiv1bidsbidId1A66992A",
+    "EkBharathApiv1bidsOPTIONS3DDD0AFA",
+    "EkBharathApiv1bidsPOST3A4B82E5",
+    "EkBharathApiv1bids5CC86EE2",
+    "EkBharathApiv1chatchatIdmessagesOPTIONSF77CA7ED",
+    "EkBharathApiv1chatchatIdmessagesPOSTAB08D458",
+    "EkBharathApiv1chatchatIdmessages57F734E5",
+    "EkBharathApiv1chatchatIdOPTIONS730EB28F",
+    "EkBharathApiv1chatchatId25759A2B",
+    "EkBharathApiv1chatOPTIONSA2EAAFE3",
+    "EkBharathApiv1chat8A047A49",
+    "EkBharathApiv1OPTIONSFDDD2069",
+    "EkBharathApiv1pricesmarketdataOPTIONS5CDDF09C",
+    "EkBharathApiv1pricesmarketdataDC0BA21F",
+    "EkBharathApiv1pricesOPTIONSCD8F1A28",
+    "EkBharathApiv1pricesqueryOPTIONSDE24B240",
+    "EkBharathApiv1pricesquery9EEA9F4A",
+    "EkBharathApiv1prices1AFB34F5",
+    "EkBharathApiv1productsproductIdOPTIONS4799317D",
+    "EkBharathApiv1productsproductId1EBA5FF2",
+    "EkBharathApiv1productsGET957D25B3",
+    "EkBharathApiv1productsOPTIONSE3F48CE9",
+    "EkBharathApiv1productsPOST4D2CED78",
+    "EkBharathApiv1products18E4C1F3",
+    "EkBharathApiv1productssearchOPTIONS83CC5AD3",
+    "EkBharathApiv1productssearch26CCA209",
+    "EkBharathApiv1A3A0E956",
+    "EkBharathApiv1translateOPTIONS98538B55",
+    "EkBharathApiv1translateC0E869AB",
+    "EkBharathApiv1translatetextOPTIONS19CECFDB",
+    "EkBharathApiv1translatetext53DDC37A",
+    "EkBharathApiv1translatevoiceOPTIONS91FC158B",
+    "EkBharathApiv1translatevoicePOSTAF3DBDE3",
+    "EkBharathApiv1translatevoiceDE7C2807",
+    "EkBharathApiv1usersuserIdOPTIONS06A12BF8",
+    "EkBharathApiv1usersuserId41795602",
+    "EkBharathApiv1usersOPTIONS1444B905",
+    "EkBharathApiv1users7B8892C4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Deployment/Resource"
+   }
+  },
+  "EkBharathApiDeploymentStageprod93C88F9E": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "EkBharathApiDeployment2A9A8D2E97dbd34888a2cda2f63af5d63f241b61"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    },
+    "StageName": "prod",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "EkBharathApiAccountD462C83D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "EkBharathApiOPTIONSCFE9D8E3": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "EkBharathApi5D9D1F7B",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1A3A0E956": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "EkBharathApi5D9D1F7B",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "v1",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/Resource"
+   }
+  },
+  "EkBharathApiv1OPTIONSFDDD2069": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1authDE241AEC": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "auth",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/Resource"
+   }
+  },
+  "EkBharathApiv1authOPTIONSD65E5228": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1authDE241AEC"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1authloginA30C97B3": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1authDE241AEC"
+    },
+    "PathPart": "login",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/Resource"
+   }
+  },
+  "EkBharathApiv1authloginOPTIONSC37F31B4": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1authloginA30C97B3"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1authloginPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authlogin62CDD847": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/POST/v1/auth/login"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.login"
+   }
+  },
+  "EkBharathApiv1authloginPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authloginE4EE536A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/POST/v1/auth/login"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.login"
+   }
+  },
+  "EkBharathApiv1authloginPOSTBAA8C298": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AuthFunctionA1CD5E0F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1authloginA30C97B3"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/POST/Resource"
+   }
+  },
+  "EkBharathApiv1authregister56CB8437": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1authDE241AEC"
+    },
+    "PathPart": "register",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/Resource"
+   }
+  },
+  "EkBharathApiv1authregisterOPTIONSE58FB547": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1authregister56CB8437"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1authregisterPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authregisterBF002836": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/POST/v1/auth/register"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.register"
+   }
+  },
+  "EkBharathApiv1authregisterPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authregister511F8D50": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/POST/v1/auth/register"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.register"
+   }
+  },
+  "EkBharathApiv1authregisterPOST3E8068A6": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AuthFunctionA1CD5E0F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1authregister56CB8437"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/POST/Resource"
+   }
+  },
+  "EkBharathApiv1authverifyC3A79A67": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1authDE241AEC"
+    },
+    "PathPart": "verify",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/verify/Resource"
+   }
+  },
+  "EkBharathApiv1authverifyOPTIONSEC77BB56": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1authverifyC3A79A67"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/verify/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1users7B8892C4": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "users",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/users/Resource"
+   }
+  },
+  "EkBharathApiv1usersOPTIONS1444B905": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1users7B8892C4"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/users/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1usersuserId41795602": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1users7B8892C4"
+    },
+    "PathPart": "{userId}",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/users/{userId}/Resource"
+   }
+  },
+  "EkBharathApiv1usersuserIdOPTIONS06A12BF8": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1usersuserId41795602"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/users/{userId}/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1products18E4C1F3": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "products",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/Resource"
+   }
+  },
+  "EkBharathApiv1productsOPTIONSE3F48CE9": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1products18E4C1F3"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1productsproductId1EBA5FF2": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1products18E4C1F3"
+    },
+    "PathPart": "{productId}",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/{productId}/Resource"
+   }
+  },
+  "EkBharathApiv1productsproductIdOPTIONS4799317D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1productsproductId1EBA5FF2"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/{productId}/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1productssearch26CCA209": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1products18E4C1F3"
+    },
+    "PathPart": "search",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/search/Resource"
+   }
+  },
+  "EkBharathApiv1productssearchOPTIONS83CC5AD3": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1productssearch26CCA209"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/search/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1productsGETApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29GETv1productsD1B5ABCE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ProductFunction5AC8A50B",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/GET/v1/products"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/GET/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.GET..v1.products"
+   }
+  },
+  "EkBharathApiv1productsGETApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29GETv1productsD2F09755": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ProductFunction5AC8A50B",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/GET/v1/products"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/GET/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.GET..v1.products"
+   }
+  },
+  "EkBharathApiv1productsGET957D25B3": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ProductFunction5AC8A50B",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1products18E4C1F3"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/GET/Resource"
+   }
+  },
+  "EkBharathApiv1productsPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1productsD4944251": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ProductFunction5AC8A50B",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/POST/v1/products"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.products"
+   }
+  },
+  "EkBharathApiv1productsPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1productsD2DFE15C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ProductFunction5AC8A50B",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/POST/v1/products"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.products"
+   }
+  },
+  "EkBharathApiv1productsPOST4D2CED78": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ProductFunction5AC8A50B",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1products18E4C1F3"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/products/POST/Resource"
+   }
+  },
+  "EkBharathApiv1bids5CC86EE2": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "bids",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/Resource"
+   }
+  },
+  "EkBharathApiv1bidsOPTIONS3DDD0AFA": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1bids5CC86EE2"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1bidsbidId1A66992A": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1bids5CC86EE2"
+    },
+    "PathPart": "{bidId}",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/{bidId}/Resource"
+   }
+  },
+  "EkBharathApiv1bidsbidIdOPTIONS9851EE21": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1bidsbidId1A66992A"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/{bidId}/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1bidsPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1bidsB0583CA0": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "BiddingFunctionCA7AE79F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/POST/v1/bids"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.bids"
+   }
+  },
+  "EkBharathApiv1bidsPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1bidsEB31B440": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "BiddingFunctionCA7AE79F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/POST/v1/bids"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.bids"
+   }
+  },
+  "EkBharathApiv1bidsPOST3A4B82E5": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "BiddingFunctionCA7AE79F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1bids5CC86EE2"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/POST/Resource"
+   }
+  },
+  "EkBharathApiv1translateC0E869AB": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "translate",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/Resource"
+   }
+  },
+  "EkBharathApiv1translateOPTIONS98538B55": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1translateC0E869AB"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1translatevoiceDE7C2807": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1translateC0E869AB"
+    },
+    "PathPart": "voice",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/Resource"
+   }
+  },
+  "EkBharathApiv1translatevoiceOPTIONS91FC158B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1translatevoiceDE7C2807"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1translatevoicePOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1translatevoiceE17E17AB": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TranslationFunction17B809B4",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/POST/v1/translate/voice"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.translate.voice"
+   }
+  },
+  "EkBharathApiv1translatevoicePOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1translatevoiceA40B9DC9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TranslationFunction17B809B4",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/POST/v1/translate/voice"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.translate.voice"
+   }
+  },
+  "EkBharathApiv1translatevoicePOSTAF3DBDE3": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "TranslationFunction17B809B4",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1translatevoiceDE7C2807"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/POST/Resource"
+   }
+  },
+  "EkBharathApiv1translatetext53DDC37A": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1translateC0E869AB"
+    },
+    "PathPart": "text",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/text/Resource"
+   }
+  },
+  "EkBharathApiv1translatetextOPTIONS19CECFDB": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1translatetext53DDC37A"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/text/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1chat8A047A49": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "chat",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/Resource"
+   }
+  },
+  "EkBharathApiv1chatOPTIONSA2EAAFE3": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1chat8A047A49"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1chatchatId25759A2B": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1chat8A047A49"
+    },
+    "PathPart": "{chatId}",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/Resource"
+   }
+  },
+  "EkBharathApiv1chatchatIdOPTIONS730EB28F": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1chatchatId25759A2B"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1chatchatIdmessages57F734E5": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1chatchatId25759A2B"
+    },
+    "PathPart": "messages",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/Resource"
+   }
+  },
+  "EkBharathApiv1chatchatIdmessagesOPTIONSF77CA7ED": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1chatchatIdmessages57F734E5"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1chatchatIdmessagesPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1chatchatIdmessages4D841E5B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ChatFunction3D7C447E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/",
+       {
+        "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+       },
+       "/POST/v1/chat/*/messages"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.chat.{chatId}.messages"
+   }
+  },
+  "EkBharathApiv1chatchatIdmessagesPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1chatchatIdmessages6D4EF35A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ChatFunction3D7C447E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "EkBharathApi5D9D1F7B"
+       },
+       "/test-invoke-stage/POST/v1/chat/*/messages"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.chat.{chatId}.messages"
+   }
+  },
+  "EkBharathApiv1chatchatIdmessagesPOSTAB08D458": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ChatFunction3D7C447E",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "EkBharathApiv1chatchatIdmessages57F734E5"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/POST/Resource"
+   }
+  },
+  "EkBharathApiv1prices1AFB34F5": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1A3A0E956"
+    },
+    "PathPart": "prices",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/Resource"
+   }
+  },
+  "EkBharathApiv1pricesOPTIONSCD8F1A28": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1prices1AFB34F5"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1pricesquery9EEA9F4A": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1prices1AFB34F5"
+    },
+    "PathPart": "query",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/query/Resource"
+   }
+  },
+  "EkBharathApiv1pricesqueryOPTIONSDE24B240": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1pricesquery9EEA9F4A"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/query/OPTIONS/Resource"
+   }
+  },
+  "EkBharathApiv1pricesmarketdataDC0BA21F": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "EkBharathApiv1prices1AFB34F5"
+    },
+    "PathPart": "market-data",
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/market-data/Resource"
+   }
+  },
+  "EkBharathApiv1pricesmarketdataOPTIONS5CDDF09C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "EkBharathApiv1pricesmarketdataDC0BA21F"
+    },
+    "RestApiId": {
+     "Ref": "EkBharathApi5D9D1F7B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/market-data/OPTIONS/Resource"
+   }
+  },
+  "LambdaExecutionRoleD5C26073": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:Query",
+          "dynamodb:Scan",
+          "dynamodb:UpdateItem"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::GetAtt": [
+            "BidsTableE1AD1632",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "ConversationsTableCD91EB96",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "PriceHistoryTable5AD3E5A9",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "ProductsTable241ADBFF",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "TranslationCacheTable12FAE693",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "UserSessionsTable6F92E803",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "UsersTable9725E9C8",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "BidsTableE1AD1632",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "ConversationsTableCD91EB96",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "PriceHistoryTable5AD3E5A9",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "ProductsTable241ADBFF",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "TranslationCacheTable12FAE693",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "UserSessionsTable6F92E803",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "UsersTable9725E9C8",
+               "Arn"
+              ]
+             },
+             "/index/*"
+            ]
+           ]
+          }
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "DynamoDBAccess"
+     },
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "s3:DeleteObject",
+          "s3:GetObject",
+          "s3:PutObject"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "MediaBucketBCBB02BA",
+               "Arn"
+              ]
+             },
+             "/*"
+            ]
+           ]
+          },
+          {
+           "Fn::Join": [
+            "",
+            [
+             {
+              "Fn::GetAtt": [
+               "VoiceBucket529D37EA",
+               "Arn"
+              ]
+             },
+             "/*"
+            ]
+           ]
+          }
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "S3Access"
+     },
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "bedrock:InvokeModel",
+          "bedrock:InvokeModelWithResponseStream",
+          "polly:SynthesizeSpeech",
+          "transcribe:GetTranscriptionJob",
+          "transcribe:StartTranscriptionJob",
+          "translate:TranslateText"
+         ],
+         "Effect": "Allow",
+         "Resource": "*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "AIServicesAccess"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/LambdaExecutionRole/Resource"
+   }
+  },
+  "AuthFunctionA1CD5E0F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        exports.handler = async (event) => {\n          return {\n            statusCode: 200,\n            body: JSON.stringify({ message: 'Auth service placeholder' }),\n          };\n        };\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "USERS_TABLE": {
+       "Ref": "UsersTable9725E9C8"
+      },
+      "PRODUCTS_TABLE": {
+       "Ref": "ProductsTable241ADBFF"
+      },
+      "BIDS_TABLE": {
+       "Ref": "BidsTableE1AD1632"
+      },
+      "CONVERSATIONS_TABLE": {
+       "Ref": "ConversationsTableCD91EB96"
+      },
+      "PRICE_HISTORY_TABLE": {
+       "Ref": "PriceHistoryTable5AD3E5A9"
+      },
+      "TRANSLATION_CACHE_TABLE": {
+       "Ref": "TranslationCacheTable12FAE693"
+      },
+      "USER_SESSIONS_TABLE": {
+       "Ref": "UserSessionsTable6F92E803"
+      },
+      "USER_POOL_ID": {
+       "Ref": "UserPool6BA7E5F2"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaExecutionRoleD5C26073",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "LambdaExecutionRoleD5C26073"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/AuthFunction/Resource"
+   }
+  },
+  "TranslationFunction17B809B4": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        exports.handler = async (event) => {\n          return {\n            statusCode: 200,\n            body: JSON.stringify({ message: 'Translation service placeholder' }),\n          };\n        };\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "VOICE_BUCKET": {
+       "Ref": "VoiceBucket529D37EA"
+      },
+      "TRANSLATION_CACHE_TABLE": {
+       "Ref": "TranslationCacheTable12FAE693"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaExecutionRoleD5C26073",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ],
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "LambdaExecutionRoleD5C26073"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/TranslationFunction/Resource"
+   }
+  },
+  "ProductFunction5AC8A50B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        exports.handler = async (event) => {\n          return {\n            statusCode: 200,\n            body: JSON.stringify({ message: 'Product service placeholder' }),\n          };\n        };\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "PRODUCTS_TABLE": {
+       "Ref": "ProductsTable241ADBFF"
+      },
+      "MEDIA_BUCKET": {
+       "Ref": "MediaBucketBCBB02BA"
+      },
+      "PRICE_HISTORY_TABLE": {
+       "Ref": "PriceHistoryTable5AD3E5A9"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaExecutionRoleD5C26073",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "LambdaExecutionRoleD5C26073"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/ProductFunction/Resource"
+   }
+  },
+  "BiddingFunctionCA7AE79F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        exports.handler = async (event) => {\n          return {\n            statusCode: 200,\n            body: JSON.stringify({ message: 'Bidding service placeholder' }),\n          };\n        };\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "BIDS_TABLE": {
+       "Ref": "BidsTableE1AD1632"
+      },
+      "PRODUCTS_TABLE": {
+       "Ref": "ProductsTable241ADBFF"
+      },
+      "USER_SESSIONS_TABLE": {
+       "Ref": "UserSessionsTable6F92E803"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaExecutionRoleD5C26073",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "LambdaExecutionRoleD5C26073"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/BiddingFunction/Resource"
+   }
+  },
+  "ChatFunction3D7C447E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n        exports.handler = async (event) => {\n          return {\n            statusCode: 200,\n            body: JSON.stringify({ message: 'Chat service placeholder' }),\n          };\n        };\n      "
+    },
+    "Environment": {
+     "Variables": {
+      "CONVERSATIONS_TABLE": {
+       "Ref": "ConversationsTableCD91EB96"
+      },
+      "VOICE_BUCKET": {
+       "Ref": "VoiceBucket529D37EA"
+      },
+      "USER_SESSIONS_TABLE": {
+       "Ref": "UserSessionsTable6F92E803"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaExecutionRoleD5C26073",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "DependsOn": [
+    "LambdaExecutionRoleD5C26073"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/ChatFunction/Resource"
+   }
+  },
+  "CDNDistributionOrigin1S3OriginAccessControlE52EBFE0": {
+   "Type": "AWS::CloudFront::OriginAccessControl",
+   "Properties": {
+    "OriginAccessControlConfig": {
+     "Name": "EkBharathEkMandiStackCDNDistOrigin1S3OriginAccessControlAAFC720D",
+     "OriginAccessControlOriginType": "s3",
+     "SigningBehavior": "always",
+     "SigningProtocol": "sigv4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/CDNDistribution/Origin1/S3OriginAccessControl/Resource"
+   }
+  },
+  "CDNDistribution7A549351": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "CacheBehaviors": [
+      {
+       "AllowedMethods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PUT",
+        "PATCH",
+        "POST",
+        "DELETE"
+       ],
+       "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+       "Compress": true,
+       "PathPattern": "/api/*",
+       "TargetOriginId": "EkBharathEkMandiStackCDNDistributionOrigin2D6D727DE",
+       "ViewerProtocolPolicy": "https-only"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "EkBharathEkMandiStackCDNDistributionOrigin1F2C43503",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "MediaBucketBCBB02BA",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "EkBharathEkMandiStackCDNDistributionOrigin1F2C43503",
+       "OriginAccessControlId": {
+        "Fn::GetAtt": [
+         "CDNDistributionOrigin1S3OriginAccessControlE52EBFE0",
+         "Id"
+        ]
+       },
+       "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+       }
+      },
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": {
+        "Fn::Select": [
+         2,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Join": [
+             "",
+             [
+              "https://",
+              {
+               "Ref": "EkBharathApi5D9D1F7B"
+              },
+              ".execute-api.us-east-1.",
+              {
+               "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+               "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+              },
+              "/"
+             ]
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "Id": "EkBharathEkMandiStackCDNDistributionOrigin2D6D727DE",
+       "OriginPath": {
+        "Fn::Join": [
+         "",
+         [
+          "/",
+          {
+           "Fn::Select": [
+            3,
+            {
+             "Fn::Split": [
+              "/",
+              {
+               "Fn::Join": [
+                "",
+                [
+                 "https://",
+                 {
+                  "Ref": "EkBharathApi5D9D1F7B"
+                 },
+                 ".execute-api.us-east-1.",
+                 {
+                  "Ref": "AWS::URLSuffix"
+                 },
+                 "/",
+                 {
+                  "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+                 },
+                 "/"
+                ]
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "PriceClass": "PriceClass_100",
+     "Restrictions": {
+      "GeoRestriction": {
+       "Locations": [
+        "IN"
+       ],
+       "RestrictionType": "whitelist"
+      }
+     }
+    },
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "development"
+     },
+     {
+      "Key": "Owner",
+      "Value": "EkBharathEkMandi-Team"
+     },
+     {
+      "Key": "Project",
+      "Value": "EkBharathEkMandi"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/CDNDistribution/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VSTW/bMAz9LbsrGrwCxXZMXWyXFSua7RwoMuuwkUVDlBoEhv/7KMn5KLCd+Pj4JT7qi27uG918Mkde2e6wcrjT0yYae1BCbafu5M1AnZC/zc6Bal99AbNCM+jphSpX7DM5tKfsVjQrvtPTQ7IHiJldUDXX5A9+dR4MywRnhl1n9JQbQhiQGcmr78nbmIHQF7xB3zuIdGFmBc5wRGvsHkqLTdp5iD8CpTGXtjnQusQRwqxoBM9ggt0zhHe0UvJIg8EypSJ5D/Wsp5/UX5qccd50a5ghsl5noyz1HiPp6Y80fCZyOf2Cz6B1CD7ehiozKzNibyIczUlEBo7rEYvOV7i2lpIUP8Lo6DQsfW48uWJfjlOBlFIKFrK26gninrocXNA5ugwpeFbWUepeA/koeiDHgLtU9b77FbDH/AhgbiUh1BX/Q98Wz/M/pykrt6BhGxZflDxyW7hr+ke3SJ23k+uX4SmOScTz1IF+48/vzVfdfJPf/caIqyBq4QD6pdq/rQil4/oCAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "EkBharathEkMandiStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "EkBharathApiEndpointE0CB12C0": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "EkBharathApi5D9D1F7B"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiGatewayUrl": {
+   "Description": "API Gateway URL",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "EkBharathApi5D9D1F7B"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "EkBharathApiDeploymentStageprod93C88F9E"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "UserPoolId": {
+   "Description": "Cognito User Pool ID",
+   "Value": {
+    "Ref": "UserPool6BA7E5F2"
+   }
+  },
+  "UsersTableName": {
+   "Description": "Users DynamoDB Table Name",
+   "Value": {
+    "Ref": "UsersTable9725E9C8"
+   }
+  },
+  "ProductsTableName": {
+   "Description": "Products DynamoDB Table Name",
+   "Value": {
+    "Ref": "ProductsTable241ADBFF"
+   }
+  },
+  "BidsTableName": {
+   "Description": "Bids DynamoDB Table Name",
+   "Value": {
+    "Ref": "BidsTableE1AD1632"
+   }
+  },
+  "ConversationsTableName": {
+   "Description": "Conversations DynamoDB Table Name",
+   "Value": {
+    "Ref": "ConversationsTableCD91EB96"
+   }
+  },
+  "PriceHistoryTableName": {
+   "Description": "Price History DynamoDB Table Name",
+   "Value": {
+    "Ref": "PriceHistoryTable5AD3E5A9"
+   }
+  },
+  "TranslationCacheTableName": {
+   "Description": "Translation Cache DynamoDB Table Name",
+   "Value": {
+    "Ref": "TranslationCacheTable12FAE693"
+   }
+  },
+  "UserSessionsTableName": {
+   "Description": "User Sessions DynamoDB Table Name",
+   "Value": {
+    "Ref": "UserSessionsTable6F92E803"
+   }
+  },
+  "MediaBucketName": {
+   "Description": "Media S3 Bucket Name",
+   "Value": {
+    "Ref": "MediaBucketBCBB02BA"
+   }
+  },
+  "VoiceBucketName": {
+   "Description": "Voice S3 Bucket Name",
+   "Value": {
+    "Ref": "VoiceBucket529D37EA"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

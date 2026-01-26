@@ -1,0 +1,912 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "EkBharathEkMandiStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "EkBharathEkMandiStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "EkBharathEkMandiStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/us-east-1",
+      "properties": {
+        "templateFile": "EkBharathEkMandiStack.template.json",
+        "terminationProtection": false,
+        "tags": {
+          "Environment": "development",
+          "Owner": "EkBharathEkMandi-Team",
+          "Project": "EkBharathEkMandi"
+        },
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1/95b92c4c81095081c6c24d5ae2f315b5414db2b800e87d77946268e36448bf3d.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "EkBharathEkMandiStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "EkBharathEkMandiStack.assets"
+      ],
+      "metadata": {
+        "/EkBharathEkMandiStack": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "Environment",
+                "Value": "development"
+              },
+              {
+                "Key": "Owner",
+                "Value": "EkBharathEkMandi-Team"
+              },
+              {
+                "Key": "Project",
+                "Value": "EkBharathEkMandi"
+              }
+            ]
+          }
+        ],
+        "/EkBharathEkMandiStack/UsersTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "UsersTable9725E9C8"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/UsersTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UsersTable9725E9C8"
+          }
+        ],
+        "/EkBharathEkMandiStack/ProductsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ProductsTable241ADBFF"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/ProductsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductsTable241ADBFF"
+          }
+        ],
+        "/EkBharathEkMandiStack/BidsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "BidsTableE1AD1632"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/BidsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BidsTableE1AD1632"
+          }
+        ],
+        "/EkBharathEkMandiStack/ConversationsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ConversationsTableCD91EB96"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/ConversationsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ConversationsTableCD91EB96"
+          }
+        ],
+        "/EkBharathEkMandiStack/PriceHistoryTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "PriceHistoryTable5AD3E5A9"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/PriceHistoryTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PriceHistoryTable5AD3E5A9"
+          }
+        ],
+        "/EkBharathEkMandiStack/TranslationCacheTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "TranslationCacheTable12FAE693"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/TranslationCacheTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TranslationCacheTable12FAE693"
+          }
+        ],
+        "/EkBharathEkMandiStack/UserSessionsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "UserSessionsTable6F92E803"
+            }
+          }
+        ],
+        "/EkBharathEkMandiStack/UserSessionsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserSessionsTable6F92E803"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucketNotificationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketNotificationRole0EC6C809"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucketNotificationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketNotificationRoleDefaultPolicyC83FFBD0"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketBCBB02BA"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketPolicy68C27F6B"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucket/Notifications/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketNotifications36AC1320"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucket/AllowBucketNotificationsToEkBharathEkMandiStackMediaProcessorFunctionB1875FFA": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketAllowBucketNotificationsToEkBharathEkMandiStackMediaProcessorFunctionB1875FFA6EDA477C"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceBucket529D37EA"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceBucketPolicy90AEA77B"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceBucket/Notifications/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceBucketNotificationsE5B3ACFE"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceBucket/AllowBucketNotificationsToEkBharathEkMandiStackVoiceProcessorFunctionC9C7CCB8": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceBucketAllowBucketNotificationsToEkBharathEkMandiStackVoiceProcessorFunctionC9C7CCB8113BEB3A"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaProcessorFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaProcessorFunctionServiceRoleCEDE1406"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaProcessorFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaProcessorFunctionServiceRoleDefaultPolicy035FB8FC"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaProcessorFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaProcessorFunction0D91AEA9"
+          }
+        ],
+        "/EkBharathEkMandiStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceProcessorFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceProcessorFunctionServiceRoleA5C8561F"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceProcessorFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceProcessorFunctionServiceRoleDefaultPolicy33E422DC"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceProcessorFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceProcessorFunction11F26011"
+          }
+        ],
+        "/EkBharathEkMandiStack/CacheSubnetGroup": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CacheSubnetGroup"
+          }
+        ],
+        "/EkBharathEkMandiStack/RedisCache": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RedisCache"
+          }
+        ],
+        "/EkBharathEkMandiStack/SearchDomain/SlowSearchLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SearchDomainSlowSearchLogs9C65C1B4"
+          }
+        ],
+        "/EkBharathEkMandiStack/SearchDomain/SlowIndexLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SearchDomainSlowIndexLogs510CC4BC"
+          }
+        ],
+        "/EkBharathEkMandiStack/SearchDomain/AppLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SearchDomainAppLogs546C26E7"
+          }
+        ],
+        "/EkBharathEkMandiStack/SearchDomain/ESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f94C9E8C1"
+          }
+        ],
+        "/EkBharathEkMandiStack/SearchDomain/ESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97f/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SearchDomainESLogGroupPolicyc8f19d5bfc3f3ce855e94165b8047e9dee7795a97fCustomResourcePolicy29315707"
+          }
+        ],
+        "/EkBharathEkMandiStack/SearchDomain/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SearchDomainFDC494A0"
+          }
+        ],
+        "/EkBharathEkMandiStack/AWS679f53fac002430cb0da5b7982bd2287": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 0
+          }
+        ],
+        "/EkBharathEkMandiStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+          }
+        ],
+        "/EkBharathEkMandiStack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+          }
+        ],
+        "/EkBharathEkMandiStack/UserPool/smsRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolsmsRole4EA729DD"
+          }
+        ],
+        "/EkBharathEkMandiStack/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPool6BA7E5F2"
+          }
+        ],
+        "/EkBharathEkMandiStack/UserPoolClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolClient2F5918F7"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApi5D9D1F7B"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiCloudWatchRoleAE0F6FDB"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiAccountD462C83D"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiDeployment2A9A8D2E97dbd34888a2cda2f63af5d63f241b61"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiDeploymentStageprod93C88F9E"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiEndpointE0CB12C0"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiOPTIONSCFE9D8E3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1A3A0E956"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1OPTIONSFDDD2069"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authDE241AEC"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authOPTIONSD65E5228"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authloginA30C97B3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authloginOPTIONSC37F31B4"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.login": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authloginPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authlogin62CDD847"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.login": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authloginPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authloginE4EE536A"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/login/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authloginPOSTBAA8C298"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authregister56CB8437"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authregisterOPTIONSE58FB547"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.register": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authregisterPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authregisterBF002836"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.auth.register": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authregisterPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1authregister511F8D50"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/register/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authregisterPOST3E8068A6"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/verify/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authverifyC3A79A67"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/auth/verify/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1authverifyOPTIONSEC77BB56"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1users7B8892C4"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/users/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1usersOPTIONS1444B905"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/users/{userId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1usersuserId41795602"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/users/{userId}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1usersuserIdOPTIONS06A12BF8"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1products18E4C1F3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsOPTIONSE3F48CE9"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/{productId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsproductId1EBA5FF2"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/{productId}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsproductIdOPTIONS4799317D"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/search/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productssearch26CCA209"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/search/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productssearchOPTIONS83CC5AD3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/GET/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.GET..v1.products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsGETApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29GETv1productsD1B5ABCE"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/GET/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.GET..v1.products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsGETApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29GETv1productsD2F09755"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsGET957D25B3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1productsD4944251"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1productsD2DFE15C"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/products/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1productsPOST4D2CED78"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bids5CC86EE2"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bidsOPTIONS3DDD0AFA"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/{bidId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bidsbidId1A66992A"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/{bidId}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bidsbidIdOPTIONS9851EE21"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.bids": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bidsPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1bidsB0583CA0"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.bids": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bidsPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1bidsEB31B440"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/bids/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1bidsPOST3A4B82E5"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translateC0E869AB"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translateOPTIONS98538B55"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatevoiceDE7C2807"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatevoiceOPTIONS91FC158B"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.translate.voice": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatevoicePOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1translatevoiceE17E17AB"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.translate.voice": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatevoicePOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1translatevoiceA40B9DC9"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/voice/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatevoicePOSTAF3DBDE3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/text/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatetext53DDC37A"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/translate/text/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1translatetextOPTIONS19CECFDB"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chat8A047A49"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatOPTIONSA2EAAFE3"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatId25759A2B"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatIdOPTIONS730EB28F"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatIdmessages57F734E5"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatIdmessagesOPTIONSF77CA7ED"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/POST/ApiPermission.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.chat.{chatId}.messages": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatIdmessagesPOSTApiPermissionEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1chatchatIdmessages4D841E5B"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/POST/ApiPermission.Test.EkBharathEkMandiStackEkBharathApi51C6CE29.POST..v1.chat.{chatId}.messages": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatIdmessagesPOSTApiPermissionTestEkBharathEkMandiStackEkBharathApi51C6CE29POSTv1chatchatIdmessages6D4EF35A"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/chat/{chatId}/messages/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1chatchatIdmessagesPOSTAB08D458"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1prices1AFB34F5"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1pricesOPTIONSCD8F1A28"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/query/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1pricesquery9EEA9F4A"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/query/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1pricesqueryOPTIONSDE24B240"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/market-data/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1pricesmarketdataDC0BA21F"
+          }
+        ],
+        "/EkBharathEkMandiStack/EkBharathApi/Default/v1/prices/market-data/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EkBharathApiv1pricesmarketdataOPTIONS5CDDF09C"
+          }
+        ],
+        "/EkBharathEkMandiStack/LambdaExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaExecutionRoleD5C26073"
+          }
+        ],
+        "/EkBharathEkMandiStack/AuthFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthFunctionA1CD5E0F"
+          }
+        ],
+        "/EkBharathEkMandiStack/TranslationFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TranslationFunction17B809B4"
+          }
+        ],
+        "/EkBharathEkMandiStack/ProductFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductFunction5AC8A50B"
+          }
+        ],
+        "/EkBharathEkMandiStack/BiddingFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BiddingFunctionCA7AE79F"
+          }
+        ],
+        "/EkBharathEkMandiStack/ChatFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatFunction3D7C447E"
+          }
+        ],
+        "/EkBharathEkMandiStack/CDNDistribution/Origin1/S3OriginAccessControl/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDNDistributionOrigin1S3OriginAccessControlE52EBFE0"
+          }
+        ],
+        "/EkBharathEkMandiStack/CDNDistribution/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDNDistribution7A549351"
+          }
+        ],
+        "/EkBharathEkMandiStack/ApiGatewayUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayUrl"
+          }
+        ],
+        "/EkBharathEkMandiStack/UserPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolId"
+          }
+        ],
+        "/EkBharathEkMandiStack/UsersTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UsersTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/ProductsTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductsTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/BidsTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BidsTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/ConversationsTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ConversationsTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/PriceHistoryTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PriceHistoryTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/TranslationCacheTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TranslationCacheTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/UserSessionsTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserSessionsTableName"
+          }
+        ],
+        "/EkBharathEkMandiStack/MediaBucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MediaBucketName"
+          }
+        ],
+        "/EkBharathEkMandiStack/VoiceBucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VoiceBucketName"
+          }
+        ],
+        "/EkBharathEkMandiStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/EkBharathEkMandiStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/EkBharathEkMandiStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "EkBharathEkMandiStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

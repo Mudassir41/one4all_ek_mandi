@@ -1,0 +1,34 @@
+{
+  "version": "38.0.1",
+  "files": {
+    "1b76a89c99861d4099552c5b48e16daafabc13fd66f42ccdcef246972442caf6": {
+      "source": {
+        "path": "asset.1b76a89c99861d4099552c5b48e16daafabc13fd66f42ccdcef246972442caf6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1",
+          "objectKey": "1b76a89c99861d4099552c5b48e16daafabc13fd66f42ccdcef246972442caf6.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    },
+    "95b92c4c81095081c6c24d5ae2f315b5414db2b800e87d77946268e36448bf3d": {
+      "source": {
+        "path": "EkBharathEkMandiStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1",
+          "objectKey": "95b92c4c81095081c6c24d5ae2f315b5414db2b800e87d77946268e36448bf3d.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -1,0 +1,347 @@
+@import "tailwindcss";
+
+/* Import Google Fonts for Indian scripts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Cultural color scheme - defaults */
+  --primary: #FF9933; /* Saffron */
+  --primary-dark: #E55A2B;
+  --secondary: #138808; /* Green */
+  --accent: #000080; /* Navy Blue */
+  --surface: #FFFFFF;
+  --text: #2D3748;
+  --text-muted: #718096;
+  
+  /* Theme variables (will be overridden by ThemeProvider) */
+  --theme-primary: var(--primary);
+  --theme-secondary: var(--secondary);
+  --theme-accent: var(--accent);
+  --theme-background: var(--background);
+  --theme-surface: var(--surface);
+  --theme-text: var(--text);
+  --theme-text-muted: var(--text-muted);
+  
+  /* Voice interaction colors */
+  --voice-listening: #22c55e;
+  --voice-processing: #f59e0b;
+  --voice-speaking: #3b82f6;
+  --voice-error: #ef4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Cultural theme classes */
+.theme-kerala-theme {
+  --theme-primary: #228B22;
+  --theme-secondary: #F59E0B;
+  --theme-background: #f0fdf4;
+}
+
+.theme-rajasthan-theme {
+  --theme-primary: #FF9933;
+  --theme-secondary: #d97706;
+  --theme-background: #fff7ed;
+}
+
+.theme-punjab-theme {
+  --theme-primary: #F59E0B;
+  --theme-secondary: #16a34a;
+  --theme-background: #fffbeb;
+}
+
+.theme-bengal-theme {
+  --theme-primary: #DC143C;
+  --theme-secondary: #F59E0B;
+  --theme-background: #fef2f2;
+}
+
+.theme-tamil-theme {
+  --theme-primary: #a16207;
+  --theme-secondary: #F59E0B;
+  --theme-background: #fdf8f6;
+}
+
+.theme-karnataka-theme {
+  --theme-primary: #FF6347;
+  --theme-secondary: #F59E0B;
+  --theme-background: #fff5f5;
+}
+
+.theme-andhra-theme {
+  --theme-primary: #4169E1;
+  --theme-secondary: #F59E0B;
+  --theme-background: #eff6ff;
+}
+
+.theme-odisha-theme {
+  --theme-primary: #FF8C00;
+  --theme-secondary: #F59E0B;
+  --theme-background: #fff7ed;
+}
+
+/* Dark mode overrides */
+.dark-mode {
+  --theme-background: #1a1a1a;
+  --theme-surface: #2d2d2d;
+  --theme-text: #ffffff;
+  --theme-text-muted: #cccccc;
+}
+
+/* Accessibility mode overrides */
+.accessibility-mode {
+  --theme-background: #ffffff;
+  --theme-text: #000000;
+  --theme-primary: #0066cc;
+  --theme-secondary: #cc6600;
+}
+
+/* Voice state classes */
+.voice-idle {
+  /* Default state */
+}
+
+.voice-listening {
+  --voice-current: var(--voice-listening);
+}
+
+.voice-processing {
+  --voice-current: var(--voice-processing);
+}
+
+.voice-speaking {
+  --voice-current: var(--voice-speaking);
+}
+
+.voice-error {
+  --voice-current: var(--voice-error);
+}
+
+/* Font configurations for different scripts */
+.script-latin {
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-devanagari {
+  --font-family: 'Noto Sans Devanagari', 'Mangal', 'Kokila', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-tamil {
+  --font-family: 'Noto Sans Tamil', 'Latha', 'Vijaya', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-telugu {
+  --font-family: 'Noto Sans Telugu', 'Gautami', 'Vani', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-kannada {
+  --font-family: 'Noto Sans Kannada', 'Tunga', 'Kedage', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-bengali {
+  --font-family: 'Noto Sans Bengali', 'Vrinda', 'Akaash', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-odia {
+  --font-family: 'Noto Sans Oriya', 'Kalinga', 'Utkal', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+.script-malayalam {
+  --font-family: 'Noto Sans Malayalam', 'Kartika', 'Rachana', system-ui, sans-serif;
+  font-family: var(--font-family);
+}
+
+/* RTL support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+/* Language-specific adjustments */
+.lang-hi, .lang-ta, .lang-te, .lang-kn, .lang-bn, .lang-or, .lang-ml {
+  line-height: 1.6; /* Better line height for Indian scripts */
+}
+
+/* Voice-first UI enhancements */
+.voice-button {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.voice-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+}
+
+.voice-button:active {
+  transform: scale(0.95);
+}
+
+/* Cultural icons styling */
+.cultural-icon {
+  transition: all 0.3s ease;
+}
+
+.cultural-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Cultural patterns */
+.cultural-pattern {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Festival theme animations */
+.festival-active {
+  animation: festival-glow 3s ease-in-out infinite;
+}
+
+@keyframes festival-glow {
+  0%, 100% { 
+    filter: brightness(1) saturate(1);
+  }
+  50% { 
+    filter: brightness(1.1) saturate(1.2);
+  }
+}
+
+/* Voice interaction animations */
+.voice-listening .voice-button {
+  animation: voice-pulse 2s ease-in-out infinite;
+}
+
+.voice-processing .voice-button {
+  animation: processing-spin 1s linear infinite;
+}
+
+@keyframes voice-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes processing-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .voice-button,
+  .cultural-icon,
+  .festival-active {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .voice-button {
+    border: 2px solid currentColor;
+  }
+  
+  .cultural-icon {
+    filter: contrast(2);
+  }
+}
+
+/* Large text support */
+@media (min-width: 768px) {
+  .lang-hi, .lang-ta, .lang-te, .lang-kn, .lang-bn, .lang-or, .lang-ml {
+    font-size: 1.1em; /* Slightly larger text for better readability */
+  }
+}
+
+/* Regional pattern backgrounds */
+.pattern-kolam {
+  background-image: var(--pattern-kolam);
+}
+
+.pattern-mandala {
+  background-image: var(--pattern-mandala);
+}
+
+.pattern-paisley {
+  background-image: var(--pattern-paisley);
+}
+
+.pattern-lotus {
+  background-image: var(--pattern-lotus);
+}
+
+/* Theme-aware components */
+.themed-bg {
+  background-color: var(--theme-background);
+}
+
+.themed-surface {
+  background-color: var(--theme-surface);
+}
+
+.themed-text {
+  color: var(--theme-text);
+}
+
+.themed-text-muted {
+  color: var(--theme-text-muted);
+}
+
+.themed-primary {
+  color: var(--theme-primary);
+}
+
+.themed-secondary {
+  color: var(--theme-secondary);
+}
+
+.themed-border {
+  border-color: var(--theme-primary);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
