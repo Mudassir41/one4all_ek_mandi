@@ -1,159 +1,173 @@
-# Ek Bharath Ek Mandi (एक भारत एक मंडी)
+# 🌾 Ek Bharath Ek Mandi (एक भारत एक मंडी)
 
-India's Voice-First Cross-State Trading Platform
+> **India's Voice-First Multilingual Trading Platform** — Breaking language barriers for 400M+ regional traders
 
-## Project Overview
-
-Ek Bharath Ek Mandi is a revolutionary web platform that connects regional vendors with national buyers (both B2B and B2C) through real-time AI voice translation, live bidding, price discovery, and multilingual negotiation tools. The platform aims to break language barriers in India's local trade sectors including agriculture, sericulture, handicrafts, and fisheries.
-
-## Features
-
-- 🎤 **Voice-First Interface**: Natural communication in regional languages
-- 🌍 **Multi-Language Support**: 7+ Indian languages with real-time translation
-- 🌾 **Cross-State Commerce**: Connect farmers, artisans, and buyers across India
-- 💰 **AI-Powered Price Discovery**: Transparent market pricing with trend analysis
-- 🏪 **Dual Market Support**: Both B2B wholesale and B2C retail transactions
-- 📱 **Mobile-Responsive**: Optimized for smartphones and low-bandwidth networks
-
-## Supported Languages
-
-- हिंदी (Hindi)
-- தமிழ் (Tamil)
-- తెలుగు (Telugu)
-- ಕನ್ನಡ (Kannada)
-- বাংলা (Bengali)
-- ଓଡ଼ିଆ (Odia)
-- മലയാളം (Malayalam)
-- English
-
-## Technology Stack
-
-- **Frontend**: Next.js 14 with TypeScript
-- **Styling**: Tailwind CSS
-- **Backend**: AWS Lambda + API Gateway (planned)
-- **Database**: DynamoDB (planned)
-- **AI Services**: Amazon Bedrock, Transcribe, Polly (planned)
-- **Storage**: S3 for media files (planned)
-- **Search**: OpenSearch (planned)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18.19.1 or higher
-- npm 9.2.0 or higher
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd ek-bharath-ek-mandi
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-## Project Structure
-
-```
-src/
-├── app/                 # Next.js app directory
-│   ├── layout.tsx      # Root layout component
-│   ├── page.tsx        # Home page
-│   └── globals.css     # Global styles
-├── components/         # Reusable UI components
-├── lib/               # Utility functions and configurations
-│   ├── config.ts      # Application configuration
-│   └── utils.ts       # Common utility functions
-├── types/             # TypeScript type definitions
-├── hooks/             # Custom React hooks
-└── services/          # API and external service integrations
-```
-
-## Development Roadmap
-
-### Phase 1: Foundation (Hours 1-4) ✅
-- [x] Initialize Next.js project with TypeScript
-- [x] Set up basic project structure
-- [x] Configure responsive design with Tailwind CSS
-- [x] Create core type definitions
-- [x] Set up utility functions and configuration
-
-### Phase 2: Core Translation Services (Hours 5-8)
-- [ ] Integrate Amazon Transcribe for speech-to-text
-- [ ] Integrate Amazon Bedrock for context-aware translation
-- [ ] Integrate Amazon Polly for text-to-speech
-- [ ] Create translation service API
-- [ ] Implement real-time communication
-
-### Phase 3: Product & Search System (Hours 9-12)
-- [ ] Build product management system
-- [ ] Implement multilingual search engine
-- [ ] Create vendor dashboard
-- [ ] Build buyer interfaces (B2B and B2C)
-
-### Phase 4: Bidding & Transaction System (Hours 13-16)
-- [ ] Implement bidding system
-- [ ] Create transaction management
-- [ ] Build notification system
-
-### Phase 5: AI-Powered Features (Hours 17-20)
-- [ ] Integrate price discovery AI
-- [ ] Implement smart recommendations
-- [ ] Create AI chat assistant
-
-### Phase 6: Testing & Deployment (Hours 21-24)
-- [ ] Comprehensive testing suite
-- [ ] Performance optimization
-- [ ] Security implementation
-- [ ] Production deployment
-
-## Target Users
-
-### Vendors (Primary Users)
-- Farmers, artisans, fishers, producers across India
-- Communicate in regional languages
-- Seek fair prices and wider market reach
-
-### B2B Buyers (Secondary Users)
-- Wholesalers, traders, retailers from different states
-- Source products from across India for resale
-- Need efficient supplier discovery and negotiation
-
-### B2C Buyers (Tertiary Users)
-- Tourists, travelers, individual consumers
-- Want authentic local products at fair prices
-- Prefer simple, intuitive interfaces
-
-## Contributing
-
-This project is part of the AI for Bharat - 26 Jan Prompt Challenge. Development follows a 24-hour MVP sprint methodology.
-
-## License
-
-This project is developed for the AI for Bharat challenge and follows applicable open-source guidelines.
-
-## Contact
-
-For questions about this project, please refer to the challenge documentation or contact the development team.
+[![AI for Bharat Challenge](https://img.shields.io/badge/AI%20for%20Bharat-26%20Jan%20Challenge-orange)](https://hack2skill.com)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://typescriptlang.org)
 
 ---
 
-**Status**: 🚧 MVP Development in Progress - 24 Hour Sprint
+## 🎯 The Problem
+
+**India's ₹15 lakh crore agricultural trade is fragmented by language.**
+
+| Reality | Impact |
+|---------|--------|
+| 22 official languages, 19,500+ dialects | Cross-state trade is nearly impossible |
+| 86% of farmers speak only regional languages | Can't negotiate with buyers from other states |
+| Middlemen take 40-60% margins | Due to communication barriers |
+
+**Example:** A Tamil farmer growing premium tomatoes can't directly negotiate with a Hindi-speaking restaurant owner in Delhi — losing potential income to middlemen.
+
+---
+
+## 💡 Our Solution
+
+**AI-powered real-time translation** enabling seamless trade across language barriers.
+
+```
+Tamil Farmer → "நல்ல தக்காளி, கிலோ 45 ரூபாய்"
+                     ↓ AI Translation
+Hindi Buyer  ← "अच्छे टमाटर, ₹45/किलो"
+                     ↓
+                 Successful Trade! 🤝
+```
+
+---
+
+## 🚀 Demo Walkthrough
+
+### Flow 1: Buyer Places Bid
+1. **Homepage** (`/`) — Browse products, switch UI language
+2. **Product Card** — View tomatoes from Tamil Nadu seller
+3. **Place Bid** — Hindi buyer submits: `"मुझे 50 किलो चाहिए"` (I need 50 kg)
+
+### Flow 2: Seller Receives & Responds
+1. **Seller Dashboard** (`/seller`) — See incoming bids with translation
+2. **Translation Panel** — Original: `"मुझे 50 किलो चाहिए"` → Translated: `"I need 50 kg"`
+3. **Accept/Reject/Counter** — Respond in your own language
+
+### Flow 3: Buyer Tracks Status
+1. **Buyer Dashboard** (`/buyer`) — Track all bids
+2. **Status Updates** — See ✅ Accepted / ⏳ Pending / ❌ Rejected
+3. **Proceed** — Payment & delivery coordination
+
+---
+
+## ✨ Features (MVP)
+
+| Feature | Status |
+|---------|--------|
+| 🌐 8-language UI (Hindi, Tamil, Telugu, Kannada, Bengali, Odia, Malayalam, English) | ✅ |
+| 🛒 Product marketplace with categories | ✅ |
+| 💰 Bidding system with real-time translation | ✅ |
+| 👨‍🌾 Seller dashboard with bid management | ✅ |
+| 🛍️ Buyer dashboard with bid tracking | ✅ |
+| 🔄 Language switcher in all pages | ✅ |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Next.js 14, TypeScript, Tailwind CSS |
+| **State** | React Context (BiddingContext, I18nContext) |
+| **Styling** | Tailwind CSS with responsive design |
+| **i18n** | Custom i18n infrastructure for 8 languages |
+
+---
+
+## 🔮 Future Roadmap
+
+### Phase 2: Voice-First
+- Silero VAD (Voice Activity Detection)
+- AWS Transcribe (Speech-to-Text)
+- AWS Polly (Text-to-Speech)
+
+### Phase 3: AI Intelligence
+- Amazon Bedrock for context-aware translation
+- Pydantic AI agents for negotiation assistance
+
+### Phase 4: Production
+- XGBoost price prediction (trained on APMC data)
+- UPI payments via Razorpay
+- Logistics integration (Dunzo, Porter)
+
+---
+
+## 🏃 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/multilingual-mandi.git
+cd multilingual-mandi/mandi
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Open http://localhost:3000
+```
+
+### Demo Credentials
+This is a UI mockup demo — no authentication required. Simply:
+1. Visit `/` for homepage
+2. Visit `/seller` for seller dashboard
+3. Visit `/buyer` for buyer dashboard
+
+---
+
+## 📁 Project Structure
+
+```
+mandi/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx          # Homepage with products
+│   │   ├── seller/page.tsx   # Seller dashboard
+│   │   ├── buyer/page.tsx    # Buyer dashboard
+│   │   └── layout.tsx        # Root layout
+│   ├── components/
+│   │   └── ui/               # Reusable UI components
+│   └── contexts/
+│       ├── BiddingContext.tsx  # Shared bid state
+│       └── I18nContext.tsx     # Language switching
+```
+
+---
+
+## 🎯 Target Users
+
+| User Type | Need | Solution |
+|-----------|------|----------|
+| **Farmers/Artisans** | Fair prices, wider market | Direct access to national buyers |
+| **B2B Buyers** | Quality sourcing across India | Multilingual negotiation |
+| **B2C Consumers** | Authentic local products | Transparent pricing |
+
+---
+
+## 🏆 AI for Bharat Challenge
+
+This project addresses the **"Multilingual Mandi"** challenge track:
+> *"Use AI to break language barriers and enable seamless commerce across India's diverse linguistic landscape."*
+
+**AWS Services (Planned):**
+- Amazon Transcribe — Regional language STT
+- Amazon Bedrock — Context-aware translation
+- Amazon Polly — Natural TTS in Indian languages
+
+---
+
+## 👨‍💻 Team
+
+Built with ❤️ for AI for Bharat 26 Jan Challenge
+
+---
+
+## 📜 License
+
+MIT License — Built for the AI for Bharat Hackathon

@@ -30,14 +30,65 @@ Static UI mockup with hardcoded data for initial visualization.
 
 ---
 
-# PHASE 2: Complete UI Polish
+# PHASE 2: FUNCTIONAL MVP - CORE FEATURES
 
 ## Goal
-Polish UI, add missing pages, voice-first design patterns.
+Build actual functional platform with real data flows and basic AI integration.
 
-## Pages to Build
+## Priority 1: Backend Infrastructure & Data Layer
+### 2.1 Database & API Setup
+- [ ] Set up DynamoDB tables (Users, Products, Bids, Conversations)
+- [ ] Create Lambda API functions for CRUD operations
+- [ ] Implement API Gateway routing
+- [ ] Add authentication system (phone OTP)
+- [ ] Create user registration/login flows
 
-### 2.1 Product Detail Page `/product/[id]`
+### 2.2 Product Management System
+- [ ] **Seller Product Creation** (Voice + Manual + AI-driven)
+  - [ ] Voice description input with transcription
+  - [ ] AI-powered product categorization
+  - [ ] Manual form input for literate users
+  - [ ] Photo upload with S3 integration
+  - [ ] Dual pricing (wholesale/retail)
+  - [ ] Location-based categorization
+- [ ] Product listing API with real database
+- [ ] Product search with basic filtering
+- [ ] Product detail pages with real data
+
+### 2.3 Bidding & Transaction System
+- [ ] Real bidding system with database persistence
+- [ ] Bid notifications (real-time)
+- [ ] Bid acceptance/rejection workflows
+- [ ] Transaction status tracking
+- [ ] Order management system
+
+## Priority 2: AI Integration (Basic)
+### 2.4 Voice & Translation Pipeline
+- [ ] **Voice-to-Text**: AWS Transcribe integration
+- [ ] **Text Translation**: AWS Translate API
+- [ ] **Text-to-Speech**: AWS Polly integration
+- [ ] **Voice Product Creation**: Full voice-driven product listing
+- [ ] **Voice Bidding**: Voice-based bid placement
+- [ ] **Voice Chat**: Basic voice messaging between users
+
+### 2.5 AI-Driven Features
+- [ ] **Smart Product Categorization**: AI categorizes products from voice descriptions
+- [ ] **Price Suggestions**: AI suggests competitive pricing
+- [ ] **Basic Price Discovery**: Simple market price queries
+- [ ] **Translation Context**: Trade-specific terminology handling
+
+## Priority 3: User Flows & Experience
+### 2.6 Complete User Journeys
+- [ ] **Seller Journey**: Register → Add Products (Voice/Manual) → Manage Bids → Accept Orders
+- [ ] **B2B Buyer Journey**: Register → Search Products → Place Bids → Track Orders
+- [ ] **B2C Buyer Journey**: Browse → Chat with Seller → Direct Purchase
+- [ ] **Cross-Language Communication**: Real voice translation in conversations
+
+### 2.7 Essential Pages & UI Components
+
+#### Pages to Build
+
+**2.7.1 Product Detail Page `/product/[id]`**
 ```
 [← Back]                    [❤️] [Share]
 ┌─────────────────────────────────────┐
@@ -57,7 +108,7 @@ Organic Tomatoes ⭐ 4.8 (23 reviews)
 [🎤 Talk to Seller]  [💰 Place Bid]
 ```
 
-### 2.2 Place Bid Modal
+**2.7.2 Place Bid Modal**
 ```
 ┌─────────────────────────────────────┐
 │ Place Bid on Organic Tomatoes       │
@@ -77,7 +128,7 @@ Organic Tomatoes ⭐ 4.8 (23 reviews)
 └─────────────────────────────────────┘
 ```
 
-### 2.3 Chat/Negotiation Page `/chat/[id]`
+**2.7.3 Chat/Negotiation Page `/chat/[id]`**
 ```
 ┌─────────────────────────────────────┐
 │ [←] Chat with Ravi Kumar      [📞] │
@@ -99,24 +150,84 @@ Organic Tomatoes ⭐ 4.8 (23 reviews)
 └─────────────────────────────────────┘
 ```
 
-### 2.4 Add Product Page (Seller)
-- Photo upload
-- Voice description input
-- Category, price, quantity fields
-- Save draft / Publish
+**2.7.4 Add Product Page (Seller) - Voice-First Design**
+```
+┌─────────────────────────────────────┐
+│ [←] Add New Product                 │
+├─────────────────────────────────────┤
+│ 🎤 Describe Your Product            │
+│ ┌─────────────────────────────────┐ │
+│ │ [🎤 Hold to Record]             │ │
+│ │ "मेरे पास ताजे टमाटर हैं..."      │ │
+│ │ ↓ AI Processing...              │ │
+│ │ "Fresh tomatoes available"      │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ 📸 Add Photos                       │
+│ [📷 Camera] [📁 Gallery]            │
+│                                     │
+│ 🏷️ AI Suggested Details            │
+│ Category: Vegetables ✓              │
+│ Price: ₹45/kg (Market: ₹40-50)     │
+│ Quantity: [___] kg                  │
+│ Location: Chennai, TN ✓             │
+│                                     │
+│ 💰 Pricing Options                  │
+│ Wholesale (100kg+): ₹[___]/kg      │
+│ Retail: ₹[___]/kg                  │
+│                                     │
+│ [Save Draft] [🎤 Review] [Publish]  │
+└─────────────────────────────────────┘
+```
 
-### 2.5 Analytics Page (Seller)
-- Revenue trend chart
-- Top products
-- Buyer demographics pie chart
+**2.7.5 Analytics Page (Seller)**
+```
+┌─────────────────────────────────────┐
+│ 📊 My Business Analytics            │
+├─────────────────────────────────────┤
+│ This Month: ₹45,230 📈 +12%        │
+│                                     │
+│ 📈 Revenue Trend                    │
+│ [Line Chart - 6 months]            │
+│                                     │
+│ 🏆 Top Products                     │
+│ 1. Tomatoes - ₹15,400              │
+│ 2. Onions - ₹12,800                │
+│ 3. Potatoes - ₹8,900               │
+│                                     │
+│ 👥 Buyer Demographics               │
+│ [Pie Chart]                        │
+│ • B2B Wholesale: 65%               │
+│ • B2C Retail: 25%                  │
+│ • Tourists: 10%                    │
+│                                     │
+│ 🌍 Geographic Reach                 │
+│ Delhi: 35% | Mumbai: 25%           │
+│ Bangalore: 20% | Others: 20%       │
+└─────────────────────────────────────┘
+```
 
-## Components to Build
-- [ ] VoiceInputField (with mic button)
-- [ ] AudioPlayer (for voice messages)
-- [ ] TranslationBubble (original + translated)
-- [ ] PriceChart (Recharts)
-- [ ] ImageUploader
-- [ ] QuantitySelector
+#### Essential Components to Build
+- [ ] **VoiceInputField** - Real recording with waveform visualization
+- [ ] **AudioPlayer** - Playback with translation toggle
+- [ ] **TranslationBubble** - Original + translated text with confidence score
+- [ ] **PriceChart** - Interactive charts using Recharts
+- [ ] **ImageUploader** - Drag & drop with preview
+- [ ] **QuantitySelector** - Smart input with unit conversion
+- [ ] **AIProcessingIndicator** - Shows AI categorization in progress
+- [ ] **BidNotificationToast** - Real-time bid alerts
+- [ ] **VoiceWaveform** - Visual feedback during recording
+- [ ] **LanguageToggle** - Switch between original and translated content
+- [ ] **SmartPricingSuggestion** - AI-powered price recommendations
+- [ ] **LocationPicker** - GPS + manual location selection
+
+## Success Criteria for Phase 2
+- [ ] Sellers can add products using voice description
+- [ ] AI categorizes and suggests pricing for products
+- [ ] Buyers can search and bid on real products
+- [ ] Voice messages are translated between languages
+- [ ] Real-time bidding notifications work
+- [ ] Cross-state demo: Tamil seller ↔ Hindi buyer works end-to-end
 
 ---
 
@@ -251,19 +362,19 @@ model.fit(historical_data)
 
 | Phase | Demo | Submission Ready |
 |-------|------|------------------|
-| 1 ✅ | Bid flow works | Yes |
-| 2 | Full UI pages | Yes |
-| 3 | Real translation | Yes |
-| 4 | Full product | Yes |
+| 1 ✅ | UI Mockup only | No - needs functionality |
+| 2 | Functional MVP | Yes - core features work |
+| 3 | Advanced AI | Yes - production ready |
+| 4 | Full product | Yes - market ready |
 
 ---
 
 # NEXT STEPS
 
-**Tonight**: Test MVP → Fix bugs → Submit  
-**Week 1**: Build missing UI pages + text translation API  
-**Month 1**: Full AI pipeline + analytics  
-**Month 2-3**: ML models + payments + beta launch
+**Immediate Priority**: Build functional MVP (Phase 2)
+**Week 1**: Core backend APIs + voice integration
+**Week 2**: Real bidding system + AI features  
+**Month 1**: Advanced AI pipeline + production deployment
 
 ---
 

@@ -3,7 +3,7 @@
 ## Task Overview
 This document outlines the implementation tasks for the 24-hour MVP sprint of the Ek Bharath Ek Mandi platform.
 
-## Phase 1: Foundation Setup (Hours 1-4)
+## Phase 1: UI Mockup (Hours 1-4) ✅ COMPLETE
 
 ### 1. Project Infrastructure Setup
 - [x] 1.1 Initialize Next.js project with TypeScript
@@ -21,103 +21,105 @@ This document outlines the implementation tasks for the 24-hour MVP sprint of th
 - [-] 2.5 Implement offline-first photo capture
 - [~] 2.6 Add accessibility features (screen reader support, large touch targets)
 
-### 3. Authentication System
+**Status**: UI mockup complete, but NO FUNCTIONAL BACKEND
+
+## Phase 2: FUNCTIONAL MVP - Core Backend & AI Integration (Hours 5-20)
+
+### 3. Authentication & User Management
 - [ ] 3.1 Implement phone-based OTP authentication
 - [ ] 3.2 Create user registration flow with language preference
 - [ ] 3.3 Set up JWT token management
 - [ ] 3.4 Implement role-based access control (Vendor/B2B/B2C)
 - [ ] 3.5 Add user profile management
 
-## Phase 2: Core Translation Services (Hours 5-8)
+### 4. Voice-First Product Creation System
+- [ ] 4.1 **Voice Product Description Pipeline**
+  - [ ] 4.1.1 Integrate AWS Transcribe for voice-to-text
+  - [ ] 4.1.2 Configure support for 7+ Indian languages
+  - [ ] 4.1.3 Implement real-time streaming transcription
+  - [ ] 4.1.4 Add noise reduction and audio preprocessing
+- [ ] 4.2 **AI-Powered Product Categorization**
+  - [ ] 4.2.1 Integrate Amazon Bedrock (Claude) for product analysis
+  - [ ] 4.2.2 Create trade-specific categorization prompts
+  - [ ] 4.2.3 Implement automatic category suggestion from voice description
+  - [ ] 4.2.4 Add confidence scoring for AI suggestions
+- [ ] 4.3 **Smart Pricing System**
+  - [ ] 4.3.1 Implement market price lookup from voice queries
+  - [ ] 4.3.2 Create price suggestion algorithm
+  - [ ] 4.3.3 Add wholesale vs retail pricing logic
+  - [ ] 4.3.4 Integrate with APMC price data APIs
 
-### 4. Voice Translation Pipeline
-- [ ] 4.1 Integrate Amazon Transcribe for speech-to-text
-  - [ ] 4.1.1 Configure support for 7+ Indian languages
-  - [ ] 4.1.2 Implement real-time streaming transcription
-  - [ ] 4.1.3 Add noise reduction and audio preprocessing
-- [ ] 4.2 Integrate Amazon Bedrock (Claude) for context-aware translation
-  - [ ] 4.2.1 Create trade-specific translation prompts
-  - [ ] 4.2.2 Implement context preservation across conversations
-  - [ ] 4.2.3 Add translation confidence scoring
-- [ ] 4.3 Integrate Amazon Polly for text-to-speech
-  - [ ] 4.3.1 Configure regional voice models
-  - [ ] 4.3.2 Implement natural speech synthesis
-  - [ ] 4.3.3 Add voice caching for common phrases
+### 5. Product Management API
+- [ ] 5.1 **Create Product Listing API**
+  - [ ] 5.1.1 Implement multilingual product creation
+  - [ ] 5.1.2 Add image upload and processing with S3
+  - [ ] 5.1.3 Create dual pricing system (wholesale/retail)
+  - [ ] 5.1.4 Add location-based categorization
+  - [ ] 5.1.5 Implement voice description storage and playback
+- [ ] 5.2 **Product Search & Discovery**
+  - [ ] 5.2.1 Create multilingual search with OpenSearch
+  - [ ] 5.2.2 Implement semantic search with embeddings
+  - [ ] 5.2.3 Add location-based filtering
+  - [ ] 5.2.4 Create category and price range filters
+  - [ ] 5.2.5 Add voice search capabilities
 
-### 5. Translation Service API
-- [ ] 5.1 Create translation service Lambda functions
-- [ ] 5.2 Implement caching layer with ElastiCache
-- [ ] 5.3 Add translation quality monitoring
-- [ ] 5.4 Create fallback mechanisms for service failures
-- [ ] 5.5 Implement batch translation for search results
+### 6. Real-Time Bidding & Communication System
+- [ ] 6.1 **Bidding System**
+  - [ ] 6.1.1 Create bidding API and database schema
+  - [ ] 6.1.2 Implement real-time bid notifications
+  - [ ] 6.1.3 Add bid validation and business rules
+  - [ ] 6.1.4 Create bid history and tracking
+  - [ ] 6.1.5 Implement voice bidding with translation
+- [ ] 6.2 **Voice Translation Pipeline**
+  - [ ] 6.2.1 Integrate Amazon Translate API for text translation
+  - [ ] 6.2.2 Integrate Amazon Polly for text-to-speech
+  - [ ] 6.2.3 Create voice message translation workflow
+  - [ ] 6.2.4 Implement translation caching with ElastiCache
+  - [ ] 6.2.5 Add translation quality monitoring
+- [ ] 6.3 **Real-time Communication**
+  - [ ] 6.3.1 Set up WebSocket connections for real-time chat
+  - [ ] 6.3.2 Implement voice message streaming
+  - [ ] 6.3.3 Create conversation persistence in DynamoDB
+  - [ ] 6.3.4 Add message delivery confirmations
+  - [ ] 6.3.5 Implement typing indicators and presence status
 
-### 6. Real-time Communication
-- [ ] 6.1 Set up WebSocket connections for real-time chat
-- [ ] 6.2 Implement voice message streaming
-- [ ] 6.3 Create conversation persistence in DynamoDB
-- [ ] 6.4 Add message delivery confirmations
-- [ ] 6.5 Implement typing indicators and presence status
+### 7. Essential UI Pages (Functional Implementation)
+- [ ] 7.1 **Product Detail Page** `/product/[id]`
+  - [ ] 7.1.1 Display real product data from API
+  - [ ] 7.1.2 Implement price trend charts
+  - [ ] 7.1.3 Add voice chat with seller functionality
+  - [ ] 7.1.4 Create functional bid placement
+- [ ] 7.2 **Voice-First Product Creation** `/seller/add-product`
+  - [ ] 7.2.1 Implement voice description recording
+  - [ ] 7.2.2 Add AI categorization display
+  - [ ] 7.2.3 Create smart pricing suggestions
+  - [ ] 7.2.4 Add photo upload with preview
+  - [ ] 7.2.5 Implement draft saving and publishing
+- [ ] 7.3 **Real-Time Chat Interface** `/chat/[id]`
+  - [ ] 7.3.1 Display conversation history
+  - [ ] 7.3.2 Implement voice message recording
+  - [ ] 7.3.3 Add real-time translation display
+  - [ ] 7.3.4 Create message status indicators
+- [ ] 7.4 **Functional Seller Dashboard** `/seller`
+  - [ ] 7.4.1 Display real product listings
+  - [ ] 7.4.2 Show incoming bids with notifications
+  - [ ] 7.4.3 Implement bid acceptance/rejection
+  - [ ] 7.4.4 Add sales analytics
+- [ ] 7.5 **Functional Buyer Dashboard** `/buyer`
+  - [ ] 7.5.1 Display active bids and status
+  - [ ] 7.5.2 Show order history
+  - [ ] 7.5.3 Implement supplier discovery
+  - [ ] 7.5.4 Add price comparison tools
 
-## Phase 3: Product & Search System (Hours 9-12)
-
-### 7. Product Management
-- [ ] 7.1 Create product listing API
-  - [ ] 7.1.1 Implement multilingual product creation
-  - [ ] 7.1.2 Add image upload and processing
-  - [ ] 7.1.3 Create dual pricing system (wholesale/retail)
-  - [ ] 7.1.4 Add location-based categorization
-- [ ] 7.2 Implement product search with OpenSearch
-  - [ ] 7.2.1 Create multilingual search indices
-  - [ ] 7.2.2 Implement semantic search with embeddings
-  - [ ] 7.2.3 Add location-based filtering
-  - [ ] 7.2.4 Create category and price range filters
-- [ ] 7.3 Build vendor dashboard
-  - [ ] 7.3.1 Create voice-first product listing interface
-  - [ ] 7.3.2 Implement product management (edit/delete)
-  - [ ] 7.3.3 Add inventory tracking
-  - [ ] 7.3.4 Create sales analytics dashboard
-
-### 8. Buyer Interfaces
-- [ ] 8.1 Build B2B buyer portal
-  - [ ] 8.1.1 Create advanced search interface
-  - [ ] 8.1.2 Implement supplier discovery and profiles
-  - [ ] 8.1.3 Add price comparison tools
-  - [ ] 8.1.4 Create bid management dashboard
-- [ ] 8.2 Build B2C consumer portal
-  - [ ] 8.2.1 Create tourist-friendly interface
-  - [ ] 8.2.2 Implement category browsing
-  - [ ] 8.2.3 Add direct purchase flow
-  - [ ] 8.2.4 Create simple checkout process
-
-### 9. Multilingual Search Engine
-- [ ] 9.1 Implement cross-language search algorithms
-- [ ] 9.2 Create search result ranking system
-- [ ] 9.3 Add voice search capabilities
-- [ ] 9.4 Implement search suggestions and autocomplete
-- [ ] 9.5 Create search analytics and optimization
-
-## Phase 4: Bidding & Transaction System (Hours 13-16)
-
-### 10. Bidding System
-- [ ] 10.1 Create bidding API and database schema
-- [ ] 10.2 Implement real-time bid notifications
-- [ ] 10.3 Add bid validation and business rules
-- [ ] 10.4 Create bid history and tracking
-- [ ] 10.5 Implement automatic bid expiration
-
-### 11. Transaction Management
-- [ ] 11.1 Create transaction workflow engine
-- [ ] 11.2 Implement order status tracking
-- [ ] 11.3 Add transaction history and receipts
-- [ ] 11.4 Create dispute resolution framework
-- [ ] 11.5 Implement basic escrow system
-
-### 12. Notification System
-- [ ] 12.1 Set up push notification infrastructure
-- [ ] 12.2 Create email notification templates
-- [ ] 12.3 Implement SMS notifications for critical updates
-- [ ] 12.4 Add in-app notification center
-- [ ] 12.5 Create notification preferences management
+### 8. Core UI Components (Functional)
+- [ ] 8.1 **VoiceInputField** - Real recording with AWS integration
+- [ ] 8.2 **AudioPlayer** - Playback with translation toggle
+- [ ] 8.3 **TranslationBubble** - Original + translated with confidence
+- [ ] 8.4 **AIProcessingIndicator** - Shows categorization progress
+- [ ] 8.5 **SmartPricingSuggestion** - AI-powered price recommendations
+- [ ] 8.6 **RealTimeBidNotification** - Live bid alerts
+- [ ] 8.7 **VoiceWaveform** - Visual feedback during recording
+- [ ] 8.8 **ProductCreationWizard** - Step-by-step voice-first flow
 
 ## Phase 5: AI-Powered Features (Hours 17-20)
 
