@@ -1,16 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function SellerDashboard() {
-  const [selectedLang, setSelectedLang] = useState('en');
-
-  const languages = [
-    { code: 'en', name: 'English', native: 'English' },
-    { code: 'hi', name: 'Hindi', native: 'हिंदी' },
-    { code: 'ta', name: 'Tamil', native: 'தமிழ்' },
-  ];
+  const { currentLanguage, setLanguage, t, languages } = useLanguage();
 
   // Mock incoming bids
   const incomingBids = [
@@ -54,31 +48,27 @@ export default function SellerDashboard() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">
-                {selectedLang === 'hi' ? 'विक्रेता डैशबोर्ड' : 
-                 selectedLang === 'ta' ? 'விற்பனையாளர் டாஷ்போர்டு' : 
-                 'Seller Dashboard'}
-              </h1>
-              <p className="text-green-100 text-sm">Manage your products and bids</p>
+              <h1 className="text-2xl font-bold">{t('sellerDashboard')}</h1>
+              <p className="text-green-100 text-sm">{t('sellerDesc')}</p>
             </div>
 
             {/* Navigation */}
             <div className="hidden md:flex items-center gap-6">
               <Link href="/" className="hover:text-green-200 transition font-medium">
-                {selectedLang === 'hi' ? 'होम' : selectedLang === 'ta' ? 'முகப்பு' : 'Home'}
+                {t('home')}
               </Link>
               <Link href="/seller" className="text-green-200 font-medium">
-                {selectedLang === 'hi' ? 'विक्रेता' : selectedLang === 'ta' ? 'விற்பனையாளர்கள்' : 'Sellers'}
+                {t('sellers')}
               </Link>
               <Link href="/buyer" className="hover:text-green-200 transition font-medium">
-                {selectedLang === 'hi' ? 'खरीदार' : selectedLang === 'ta' ? 'வாங்குபவர்கள்' : 'Buyers'}
+                {t('buyers')}
               </Link>
             </div>
 
             {/* Language Selector */}
             <select
-              value={selectedLang}
-              onChange={(e) => setSelectedLang(e.target.value)}
+              value={currentLanguage}
+              onChange={(e) => setLanguage(e.target.value)}
               className="bg-green-500 text-white px-3 py-2 rounded-lg border-none focus:ring-2 focus:ring-white"
             >
               {languages.map(lang => (
@@ -101,7 +91,13 @@ export default function SellerDashboard() {
               <p className="text-gray-600">📍 Chennai, Tamil Nadu</p>
               <p className="text-gray-600">⭐ 4.8 rating • 12 active listings</p>
             </div>
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-4">
+              <Link
+                href="/seller/add-product"
+                className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition font-medium"
+              >
+                ➕ {t('addProduct')}
+              </Link>
               <div className="bg-green-50 px-4 py-2 rounded-lg">
                 <p className="text-green-800 font-semibold">
                   🔔 {incomingBids.length} New Bids
@@ -167,13 +163,13 @@ export default function SellerDashboard() {
                         onClick={() => handleAcceptBid(bid.id)}
                         className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition font-medium"
                       >
-                        ✅ {selectedLang === 'hi' ? 'बोली स्वीकार करें' : selectedLang === 'ta' ? 'ஏலத்தை ஏற்கவும்' : 'Accept Bid'}
+                        ✅ {t('acceptBid', 'Accept Bid')}
                       </button>
                       <button
                         onClick={() => handleRejectBid(bid.id)}
                         className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition font-medium"
                       >
-                        ❌ {selectedLang === 'hi' ? 'बोली अस्वीकार करें' : selectedLang === 'ta' ? 'ஏலத்தை நிராகரிக்கவும்' : 'Reject Bid'}
+                        ❌ {t('rejectBid', 'Reject Bid')}
                       </button>
                       <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition font-medium">
                         🔄 Counter Offer

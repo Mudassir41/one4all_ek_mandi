@@ -164,10 +164,4 @@ This project addresses the **"Multilingual Mandi"** challenge track:
 
 ## 👨‍💻 Team
 
-Built with ❤️ for AI for Bharat 26 Jan Challenge
-
----
-
-## 📜 License
-
-MIT License — Built for the AI for Bharat Hackathon
+Built with AI for AI for Bharat 26 Jan Challenge

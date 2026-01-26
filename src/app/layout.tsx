@@ -4,6 +4,8 @@ import "./globals.css";
 import { I18nProvider } from "@/contexts/I18nContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { BiddingProvider } from "@/contexts/BiddingContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ClientI18nInitializer } from "@/components/ClientI18nInitializer";
 
 const inter = Inter({
@@ -59,13 +61,17 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <ClientI18nInitializer />
-        <I18nProvider>
-          <ThemeProvider>
-            <BiddingProvider>
-              {children}
-            </BiddingProvider>
-          </ThemeProvider>
-        </I18nProvider>
+        <LanguageProvider>
+          <I18nProvider>
+            <ThemeProvider>
+              <AuthProvider>
+                <BiddingProvider>
+                  {children}
+                </BiddingProvider>
+              </AuthProvider>
+            </ThemeProvider>
+          </I18nProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
