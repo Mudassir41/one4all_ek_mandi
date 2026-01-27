@@ -152,12 +152,12 @@ export function SimpleProductCreator() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Create New Product</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('createNewProduct')}</h2>
       
       {/* Voice Description */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          🎤 Voice Description (Recommended)
+          🎤 {t('voiceDescriptionRecommended')}
         </h3>
         
         <div className="flex flex-col items-center space-y-4">
@@ -177,7 +177,7 @@ export function SimpleProductCreator() {
           </button>
           
           <p className="text-sm text-gray-600">
-            {isRecording ? '🔴 Recording... Click to stop' : 'Click to start recording'}
+            {isRecording ? `🔴 ${t('recordingClickToStop')}` : t('clickToStartRecording')}
           </p>
         </div>
 
@@ -185,7 +185,7 @@ export function SimpleProductCreator() {
           <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="flex items-center space-x-2 mb-2">
               <CheckCircle className="w-5 h-5 text-green-600" />
-              <span className="text-green-800">Voice recording complete!</span>
+              <span className="text-green-800">{t('voiceRecordingComplete')}</span>
             </div>
             <audio controls className="w-full">
               <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
@@ -197,19 +197,19 @@ export function SimpleProductCreator() {
       {/* Text Description (Alternative) */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          📝 Text Description (Alternative)
+          📝 {t('textDescriptionAlternative')}
         </h3>
         <textarea
           value={productData.textDescription}
           onChange={(e) => setProductData(prev => ({ ...prev, textDescription: e.target.value }))}
-          placeholder="Describe your product in detail..."
+          placeholder={t('describeYourProduct')}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 h-24"
         />
       </div>
 
       {/* Images */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📸 Product Photos</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">📸 {t('productPhotos')}</h3>
         
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
           <input
@@ -225,7 +225,7 @@ export function SimpleProductCreator() {
             className="cursor-pointer flex flex-col items-center space-y-2"
           >
             <Upload className="w-8 h-8 text-gray-400" />
-            <span className="text-gray-600">Click to upload photos (max 5)</span>
+            <span className="text-gray-600">{t('clickToUploadPhotos')}</span>
           </label>
         </div>
 
@@ -251,38 +251,38 @@ export function SimpleProductCreator() {
       </div>
       {/* Manual Details (Optional) */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">⚙️ Manual Details (Optional)</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">⚙️ {t('manualDetailsOptional')}</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Wholesale Price (₹/{productData.unit})
+              {t('wholesalePriceUnit')} (₹/{productData.unit})
             </label>
             <input
               type="number"
               value={productData.wholesalePrice || ''}
               onChange={(e) => setProductData(prev => ({ ...prev, wholesalePrice: parseFloat(e.target.value) || 0 }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-              placeholder="AI will suggest if not provided"
+              placeholder={t('aiWillSuggest')}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Retail Price (₹/{productData.unit})
+              {t('retailPriceUnit')} (₹/{productData.unit})
             </label>
             <input
               type="number"
               value={productData.retailPrice || ''}
               onChange={(e) => setProductData(prev => ({ ...prev, retailPrice: parseFloat(e.target.value) || 0 }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-              placeholder="AI will suggest if not provided"
+              placeholder={t('aiWillSuggest')}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Available Quantity
+              {t('availableQuantity')}
             </label>
             <input
               type="number"
@@ -294,7 +294,7 @@ export function SimpleProductCreator() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Unit
+              {t('unit')}
             </label>
             <select
               value={productData.unit}
@@ -321,17 +321,17 @@ export function SimpleProductCreator() {
           {isCreating ? (
             <>
               <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-              Creating Product...
+              {t('creatingProduct')}
             </>
           ) : (
-            '🚀 Create Product'
+            `🚀 ${t('createProduct')}`
           )}
         </button>
         
         <p className="text-sm text-gray-500 mt-2">
           {!audioBlob && !productData.textDescription 
-            ? 'Please provide either voice or text description'
-            : 'AI will automatically categorize and suggest pricing'
+            ? t('pleaseProvideDescription')
+            : t('aiWillCategorize')
           }
         </p>
       </div>

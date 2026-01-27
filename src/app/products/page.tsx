@@ -4,12 +4,17 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Product } from '@/services';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBidding } from '@/contexts/BiddingContext';
+import { BiddingModal } from '@/components/ui/BiddingModal';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [showBiddingModal, setShowBiddingModal] = useState(false);
   const { currentLanguage, setLanguage, t, languages } = useLanguage();
+  const { addBid } = useBidding();
 
   useEffect(() => {
     fetchProducts();
@@ -27,6 +32,38 @@ export default function ProductsPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleBidClick = (product: Product) => {
+    setSelectedProduct(product);
+    setShowBiddingModal(true);
+  };
+
+  const handleSubmitBid = async (bidData: {
+    amount: number;
+    quantity: number;
+    message: string;
+    voiceMessage?: Blob;
+  }) => {
+    if (!selectedProduct) return;
+
+    await addBid({
+      productId: selectedProduct.id,
+      productName: selectedProduct.title[currentLanguage] || selectedProduct.title.en || 'Product',
+      buyerId: 'demo-buyer',
+      buyerName: 'Demo Buyer',
+      buyerLocation: 'Delhi',
+      sellerId: 'seller-1',
+      sellerName: 'Demo Seller',
+      amount: bidData.amount,
+      quantity: bidData.quantity,
+      unit: selectedProduct.pricing.retail.unit,
+      message: bidData.message,
+      voiceMessage: bidData.voiceMessage ? URL.createObjectURL(bidData.voiceMessage) : undefined,
+      status: 'pending'
+    });
+
+    alert('Bid submitted successfully! The seller will be notified.');
   };
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -174,7 +211,10 @@ export default function ProductsPage() {
                     >
                       {t('viewDetails')}
                     </Link>
-                    <button className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition font-medium">
+                    <button 
+                      onClick={() => handleBidClick(product)}
+                      className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition font-medium"
+                    >
                       💰 {t('bid')}
                     </button>
                   </div>
@@ -184,6 +224,22 @@ export default function ProductsPage() {
           </div>
         )}
       </div>
+
+      {/* Bidding Modal */}
+      {selectedProduct && (
+        <BiddingModal
+          isOpen={showBiddingModal}
+          onClose={() => setShowBiddingModal(false)}
+          product={{
+            id: selectedProduct.id,
+            title: selectedProduct.title[currentLanguage] || selectedProduct.title.en || 'Product',
+            currentPrice: selectedProduct.pricing.retail.price,
+            unit: selectedProduct.pricing.retail.unit,
+            sellerName: 'Demo Seller'
+          }}
+          onSubmitBid={handleSubmitBid}
+        />
+      )}
     </div>
   );
 }
