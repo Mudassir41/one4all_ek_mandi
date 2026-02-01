@@ -1,139 +1,102 @@
-# Multilingual Mandi — Production Feature Analysis
+# Multilingual Mandi — What's Needed for Production
 
-## Persona-Based Requirements
+## 🎯 Core Product Gaps (Priority Order)
 
-### 👨‍🌾 As Tier-2 Farmer (Seller) — Tamil Speaker from Ramanagara
+### 1. 🔐 Authentication & Authorization
+| Feature | Status | Effort |
+|---------|--------|--------|
+| Phone OTP login | Mock only | Backend needed |
+| User profiles (buyer/seller) | ❌ | Database + UI |
+| Session management | ❌ | JWT/cookies |
+| Role-based access | ❌ | Middleware |
 
-**Pain Points:**
-- Limited English literacy
-- Can't type well on smartphone
-- No way to know fair market price
-- Fear of getting cheated by distant buyers
-- Logistics are a nightmare
+### 2. 📦 Product Management
+| Feature | Status | Effort |
+|---------|--------|--------|
+| CRUD products | Mock form only | API + DB |
+| Image upload to S3 | ❌ | AWS integration |
+| Category management | Mock | Database |
+| Search & filters | ❌ | Elasticsearch/DB |
+| Product detail page `/product/[id]` | ❌ | New page |
 
-**Must-Have Features:**
-1. **Voice-First Product Listing** — Describe in Tamil, AI transcribes
-2. **Market Price Intelligence** — Show today's mandi rates before pricing
-3. **Buyer Credibility Score** — See buyer's rating, past transactions
-4. **Payment Escrow** — Money held by platform, released after delivery confirmed
-5. **Translation Panel** — Every message shows original + my language
-6. **Audio Playback** — Hear buyer's message in Tamil
+### 3. 💬 Communication
+| Feature | Status | Effort |
+|---------|--------|--------|
+| Real-time chat | ❌ | WebSocket/Firebase |
+| Voice messages | ❌ | Audio recording + S3 |
+| Push notifications | ❌ | Firebase/OneSignal |
+| Chat translation | ❌ | AWS Translate |
 
----
+### 4. 🌐 Translation System
+| Feature | Status | Effort |
+|---------|--------|--------|
+| UI text translations | Partial (EN/HI/TA) | i18n files |
+| Message translation | Mock | AWS Translate API |
+| Voice-to-text | ❌ | AWS Transcribe |
+| Text-to-speech | ❌ | AWS Polly |
 
-### 🛒 As B2B Buyer (Restaurant Owner) — Hindi Speaker from Delhi
+### 5. 💰 Bidding & Transactions
+| Feature | Status | Effort |
+|---------|--------|--------|
+| Place bid (client-side) | ✅ | — |
+| Accept/reject bid | ✅ | — |
+| Counter offers | Mock | API |
+| Payment integration | ❌ | Razorpay/UPI |
+| Escrow system | ❌ | Backend logic |
+| Order tracking | ❌ | New page |
 
-**Pain Points:**
-- Finding reliable suppliers across states
-- Language barrier with Tamil/Telugu farmers
-- Quality inconsistency
-- Bulk order negotiation is tedious
-- Tracking shipments
-
-**Must-Have Features:**
-1. **Smart Search** — "50kg organic tomatoes near Chennai" in Hindi
-2. **Seller Profiles** — Ratings, certifications (organic, farm fresh)
-3. **Bulk Order Management** — Request for Quote (RFQ) for large orders
-4. **Price Comparison** — See same product from multiple sellers
-5. **Real-time Translation** — Voice call with auto-translation
-6. **Order History** — Re-order from trusted sellers easily
-
----
-
-### 🏪 As Platform Operator
-
-**Core Infrastructure:**
-1. **AWS Transcribe** — Voice to text (11 Indian languages)
-2. **AWS Translate** — Text translation between languages
-3. **AWS Polly** — Text to speech for audio messages
-4. **AWS Bedrock** — AI for categorization, pricing suggestions
-5. **Payment Gateway** — UPI, Razorpay integration
-6. **Logistics API** — Delhivery, Shiprocket for tracking
-
----
-
-## Feature Tiers
-
-### Tier 1 — MVP Demo ✅ (Current)
-- [x] Homepage with products
-- [x] Buyer/Seller dashboards
-- [x] Place bid → Seller sees → Accept/Reject
-- [x] Language switching (EN/HI/TA)
-- [x] Mock translation display
-
-### Tier 2 — Functional Beta
-- [ ] Real AWS Transcribe integration
-- [ ] Real translation API
-- [ ] User registration with phone OTP
-- [ ] Persistent data (DynamoDB)
-- [ ] Product CRUD operations
-- [ ] Image upload (S3)
-- [ ] Push notifications
-
-### Tier 3 — Market Ready
-- [ ] Payment integration (UPI/Razorpay)
-- [ ] Escrow system
-- [ ] Logistics tracking
-- [ ] Chat with history
-- [ ] Voice calls with translation
-- [ ] Seller verification
-- [ ] Reviews & ratings
-- [ ] Price trends/analytics
-
-### Tier 4 — Scale
-- [ ] ML-based price prediction
-- [ ] Demand forecasting
-- [ ] Credit scoring for buyers
-- [ ] Multi-vendor logistics optimization
-- [ ] Regional warehousing
-- [ ] Mobile app (React Native)
+### 6. 📊 Analytics & Insights
+| Feature | Status | Effort |
+|---------|--------|--------|
+| Seller dashboard stats | Mock | Real data |
+| Price trends | ❌ | Historical data |
+| Buyer insights | ❌ | Analytics |
 
 ---
 
-## Missing UI Components for Production
+## 🛠️ Technical Debt
 
-| Component | Purpose | Priority |
-|-----------|---------|----------|
-| **Product Detail Page** | `/product/[id]` - full product info, seller info, bid history | HIGH |
-| **Chat/Negotiation Page** | `/chat/[bidId]` - message thread with translation | HIGH |
-| **User Profile** | `/profile` - edit info, view history | MEDIUM |
-| **Search Results** | `/search?q=` - filtered product list | HIGH |
-| **Order Tracking** | `/orders/[id]` - shipment status | MEDIUM |
-| **Payment Flow** | `/checkout` - amount confirmation, UPI | HIGH |
-| **Seller Analytics** | `/seller/analytics` - revenue, trends | LOW |
-| **Settings** | `/settings` - language, notifications | LOW |
+1. **TypeScript Errors** — Fix type mismatches in contexts
+2. **API Routes** — Create `/api/*` endpoints
+3. **Database** — Set up DynamoDB or Postgres
+4. **Error Handling** — Global error boundary
+5. **Loading States** — Skeleton screens
+6. **Responsive Design** — Test on mobile
+7. **PWA Support** — Offline capability
+8. **SEO** — Meta tags, OpenGraph
 
 ---
 
-## Critical User Flows Not Yet Built
+## 📱 Missing UI Pages
 
-### 1. End-to-End Purchase Flow
-```
-Browse → Select Product → Place Bid → Seller Accepts
-→ Proceed to Payment → Pay via UPI → Order Confirmed
-→ Seller Ships → Buyer Receives → Mark Complete → Release Payment
-```
-
-### 2. Voice Message Flow
-```
-Buyer Records Message → AWS Transcribes → Translates to Seller's Language
-→ Seller Reads/Listens → Replies via Voice → Buyer Gets Translation
-```
-
-### 3. Dispute Resolution Flow
-```
-Buyer Reports Issue → Platform Reviews → Mediates → Refund/Resolution
-```
+| Page | Route | Description |
+|------|-------|-------------|
+| Product Detail | `/product/[id]` | Full product info, seller, place bid |
+| Chat | `/chat/[bidId]` | Message thread with translation |
+| Search Results | `/search` | Filtered product list |
+| Order Detail | `/order/[id]` | Tracking, status |
+| Profile | `/profile` | User settings |
+| Checkout | `/checkout` | Payment flow |
 
 ---
 
-## Kiro Next Steps
+## 🏃 Immediate Next Steps (For Kiro)
 
-1. Fix TypeScript errors in contexts
+1. Fix remaining TypeScript errors
 2. Create `/product/[id]` page
-3. Create `/chat/[bidId]` page
-4. Add user registration flow
-5. Integrate AWS services
-6. Add payment mock flow
-7. Build mobile-responsive layouts
-8. Add PWA support
+3. Implement real search functionality
+4. Add loading skeletons
+5. Create chat UI mockup
+6. Test responsive design
+
+---
+
+## 🎯 Summary
+
+**Hackathon MVP: 70% Complete**
+- ✅ Core UI pages working
+- ✅ Bidding flow end-to-end (client-side)
+- ✅ Language switching
+- ❌ Real backend missing
+- ❌ Authentication mock only
+- ❌ No persistent data

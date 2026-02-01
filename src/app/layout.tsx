@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { BiddingProvider } from "@/contexts/BiddingContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { DemoUserProvider } from "@/contexts/DemoUserContext";
 import { ClientI18nInitializer } from "@/components/ClientI18nInitializer";
 
 const inter = Inter({
@@ -42,10 +43,7 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Load Indian language fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Sans+Oriya:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
+        {/* Fonts are loaded via globals.css using @import for better reliability */}
         {/* Language alternates for SEO */}
         <link rel="alternate" hrefLang="en" href="/" />
         <link rel="alternate" hrefLang="hi" href="/hi" />
@@ -62,15 +60,17 @@ export default function RootLayout({
       >
         <ClientI18nInitializer />
         <LanguageProvider>
-          <I18nProvider>
-            <ThemeProvider>
-              <AuthProvider>
-                <BiddingProvider>
-                  {children}
-                </BiddingProvider>
-              </AuthProvider>
-            </ThemeProvider>
-          </I18nProvider>
+          <DemoUserProvider>
+            <I18nProvider>
+              <ThemeProvider>
+                <AuthProvider>
+                  <BiddingProvider>
+                    {children}
+                  </BiddingProvider>
+                </AuthProvider>
+              </ThemeProvider>
+            </I18nProvider>
+          </DemoUserProvider>
         </LanguageProvider>
       </body>
     </html>

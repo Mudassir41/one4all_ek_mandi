@@ -12,7 +12,7 @@ interface SimpleLoginModalProps {
 
 export function SimpleLoginModal({ isOpen, onClose, onSuccess }: SimpleLoginModalProps) {
   const { login, verifyOTP } = useAuth();
-  
+
   const [step, setStep] = useState<'phone' | 'otp'>('phone');
   const [phone, setPhone] = useState('+919876543210'); // Pre-filled for demo
   const [otp, setOtp] = useState('');
@@ -43,12 +43,12 @@ export function SimpleLoginModal({ isOpen, onClose, onSuccess }: SimpleLoginModa
 
     try {
       const result = await verifyOTP(sessionId, otp);
-      
+
       if (result.isNewUser) {
         // For demo, we'll just show success
         alert('New user detected! In a real app, you would complete registration here.');
       }
-      
+
       onSuccess?.();
       onClose();
       resetForm();
@@ -101,7 +101,7 @@ export function SimpleLoginModal({ isOpen, onClose, onSuccess }: SimpleLoginModa
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+91XXXXXXXXXX"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 bg-white"
                   required
                 />
               </div>
@@ -145,7 +145,7 @@ export function SimpleLoginModal({ isOpen, onClose, onSuccess }: SimpleLoginModa
                 value={otp}
                 onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
                 placeholder="123456"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-center text-2xl tracking-widest"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-center text-2xl tracking-widest text-gray-900 bg-white"
                 maxLength={6}
                 required
               />

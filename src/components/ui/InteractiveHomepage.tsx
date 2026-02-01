@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useBidding } from '@/contexts/BiddingContext';
+import { useDemoUser } from '@/contexts/DemoUserContext';
+import { UserSwitcher } from '@/components/ui/UserSwitcher';
 import { SimpleLoginModal } from '@/components/auth/SimpleLoginModal';
 import { useState } from 'react';
 
@@ -122,6 +124,7 @@ export function InteractiveHomepage() {
   const { user, logout } = useAuth();
   const { currentLanguage, setLanguage, t, languages } = useLanguage();
   const { addBid } = useBidding();
+  const { currentUser } = useDemoUser();
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -196,15 +199,33 @@ export function InteractiveHomepage() {
               </div>
             </div>
 
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center gap-6">
+            {/* Navigation - Role-based */}
+            <nav className="hidden md:flex items-center gap-4">
               <Link href="/" className="text-orange-600 font-semibold">{t('home')}</Link>
-              <Link href="/products" className="text-gray-600 hover:text-orange-600 transition">{t('products')}</Link>
-              <Link href="/search" className="text-gray-600 hover:text-orange-600 transition">Search</Link>
-              <Link href="/orders" className="text-gray-600 hover:text-orange-600 transition">Orders</Link>
-              <Link href="/profile" className="text-gray-600 hover:text-orange-600 transition">Profile</Link>
-              <Link href="/seller" className="text-gray-600 hover:text-green-600 transition">{t('sellers')}</Link>
-              <Link href="/buyer" className="text-gray-600 hover:text-blue-600 transition">{t('buyers')}</Link>
+
+              {/* Show role-specific links */}
+              {currentUser?.userType === 'vendor' ? (
+                <>
+                  <Link href="/seller" className="bg-green-100 text-green-700 px-3 py-1.5 rounded-lg font-medium hover:bg-green-200 transition">
+                    📦 {t('sellerDashboard')}
+                  </Link>
+                  <Link href="/seller/add-product" className="text-gray-600 hover:text-green-600 transition">
+                    ➕ {t('addProduct')}
+                  </Link>
+                </>
+              ) : currentUser?.userType?.includes('buyer') ? (
+                <>
+                  <Link href="/buyer" className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg font-medium hover:bg-blue-200 transition">
+                    🛒 {t('buyerDashboard')}
+                  </Link>
+                </>
+              ) : (
+                /* Not logged in - show both options */
+                <>
+                  <Link href="/seller" className="text-gray-600 hover:text-green-600 transition">{t('sellers')}</Link>
+                  <Link href="/buyer" className="text-gray-600 hover:text-blue-600 transition">{t('buyers')}</Link>
+                </>
+              )}
             </nav>
 
             {/* Right side */}
@@ -220,25 +241,8 @@ export function InteractiveHomepage() {
                 ))}
               </select>
 
-              {/* Auth */}
-              {user ? (
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600 hidden sm:block">👋 {user.name || user.phone}</span>
-                  <button
-                    onClick={() => logout()}
-                    className="text-sm text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition"
-                  >
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <button
-                  onClick={() => setShowLoginModal(true)}
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition font-medium"
-                >
-                  Login
-                </button>
-              )}
+              {/* User Switcher */}
+              <UserSwitcher />
             </div>
           </div>
         </div>
@@ -262,29 +266,35 @@ export function InteractiveHomepage() {
                 'Connect buyers and sellers across India with real-time translation'}
           </p>
 
-          {/* Quick Actions */}
+          {/* Quick Actions - Role Based */}
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/seller"
-              className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-2xl hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
-            >
-              <span className="text-2xl group-hover:scale-110 transition">👨‍🌾</span>
-              <div className="text-left">
-                <div className="font-bold">{t('sellerDashboard')}</div>
-                <div className="text-sm opacity-80">{t('sellerDesc')}</div>
-              </div>
-            </Link>
+            {/* Show Seller Dashboard if no user OR user is vendor */}
+            {(!currentUser || currentUser.userType === 'vendor') && (
+              <Link
+                href="/seller"
+                className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-2xl hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
+              >
+                <span className="text-2xl group-hover:scale-110 transition">👨‍🌾</span>
+                <div className="text-left">
+                  <div className="font-bold">{t('sellerDashboard')}</div>
+                  <div className="text-sm opacity-80">{t('sellerDesc')}</div>
+                </div>
+              </Link>
+            )}
 
-            <Link
-              href="/buyer"
-              className="group bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
-            >
-              <span className="text-2xl group-hover:scale-110 transition">🛒</span>
-              <div className="text-left">
-                <div className="font-bold">{t('buyerDashboard')}</div>
-                <div className="text-sm opacity-80">{t('buyerDesc')}</div>
-              </div>
-            </Link>
+            {/* Show Buyer Dashboard if no user OR user is buyer */}
+            {(!currentUser || currentUser.userType?.includes('buyer')) && (
+              <Link
+                href="/buyer"
+                className="group bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
+              >
+                <span className="text-2xl group-hover:scale-110 transition">🛒</span>
+                <div className="text-left">
+                  <div className="font-bold">{t('buyerDashboard')}</div>
+                  <div className="text-sm opacity-80">{t('buyerDesc')}</div>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </section>
@@ -378,13 +388,21 @@ export function InteractiveHomepage() {
                     </div>
                   </div>
 
-                  {/* Action Button */}
-                  <button
-                    onClick={() => handlePlaceBid(product)}
-                    className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl hover:shadow-lg transition-all hover:scale-[1.02] font-semibold flex items-center justify-center gap-2"
-                  >
-                    💰 {t('placeBid')}
-                  </button>
+                  {/* Action Buttons */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handlePlaceBid(product)}
+                      className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl hover:shadow-lg transition-all hover:scale-[1.02] font-semibold flex items-center justify-center gap-2"
+                    >
+                      💰 {t('placeBid')}
+                    </button>
+                    <Link
+                      href="/chat/demo"
+                      className="flex-shrink-0 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-4 py-3 rounded-xl hover:shadow-lg transition flex items-center justify-center"
+                    >
+                      💬
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -472,7 +490,7 @@ export function InteractiveHomepage() {
                   type="number"
                   value={bidAmount}
                   onChange={(e) => setBidAmount(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none text-xl font-bold"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none text-xl font-bold text-gray-900 bg-white"
                   placeholder="Enter your bid"
                 />
               </div>
@@ -482,7 +500,7 @@ export function InteractiveHomepage() {
                 <textarea
                   value={bidMessage}
                   onChange={(e) => setBidMessage(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none resize-none"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none resize-none text-gray-900 bg-white"
                   rows={2}
                   placeholder={currentLanguage === 'hi' ? 'अपना संदेश लिखें...' : currentLanguage === 'ta' ? 'உங்கள் செய்தியை எழுதுங்கள்...' : 'Type your message...'}
                 />
