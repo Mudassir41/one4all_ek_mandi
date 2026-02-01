@@ -1,325 +1,547 @@
 'use client';
 
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useBidding } from '@/contexts/BiddingContext';
+import { useDemoUser } from '@/contexts/DemoUserContext';
+import { UserSwitcher } from '@/components/ui/UserSwitcher';
+import { SimpleLoginModal } from '@/components/auth/SimpleLoginModal';
 import { useState } from 'react';
 
+const categories = [
+  { id: 'all', name: 'All', nameHi: 'सभी', nameTa: 'அனைத்தும்', emoji: '🏪' },
+  { id: 'vegetables', name: 'Vegetables', nameHi: 'सब्जियां', nameTa: 'காய்கறிகள்', emoji: '🥬' },
+  { id: 'grains', name: 'Grains', nameHi: 'अनाज', nameTa: 'தானியங்கள்', emoji: '🌾' },
+  { id: 'fruits', name: 'Fruits', nameHi: 'फल', nameTa: 'பழங்கள்', emoji: '🍎' },
+  { id: 'textiles', name: 'Textiles', nameHi: 'वस्त्र', nameTa: 'ஜவுளி', emoji: '🧵' },
+  { id: 'spices', name: 'Spices', nameHi: 'मसाले', nameTa: 'மசாலாப்பொருட்கள்', emoji: '🌶️' },
+  { id: 'dairy', name: 'Dairy', nameHi: 'डेयरी', nameTa: 'பால் பொருட்கள்', emoji: '🥛' },
+];
+
+const products = [
+  {
+    id: 1,
+    name: 'Organic Tomatoes',
+    nameHi: 'जैविक टमाटर',
+    nameTa: 'இயற்கை தக்காளி',
+    price: 45,
+    unit: 'kg',
+    location: 'Chennai, TN',
+    seller: 'Ravi Kumar',
+    rating: 4.8,
+    bidsCount: 3,
+    category: 'vegetables',
+    emoji: '🍅',
+    gradient: 'from-red-400 to-orange-500'
+  },
+  {
+    id: 2,
+    name: 'Basmati Rice',
+    nameHi: 'बासमती चावल',
+    nameTa: 'பாஸ்மதி அரிசி',
+    price: 85,
+    unit: 'kg',
+    location: 'Punjab',
+    seller: 'Gurpreet Singh',
+    rating: 4.9,
+    bidsCount: 7,
+    category: 'grains',
+    emoji: '🌾',
+    gradient: 'from-amber-400 to-yellow-500'
+  },
+  {
+    id: 3,
+    name: 'Silk Cocoons',
+    nameHi: 'रेशम कोकून',
+    nameTa: 'பட்டு கூட்டுப்புழு',
+    price: 450,
+    unit: 'kg',
+    location: 'Ramanagara, KA',
+    seller: 'Lakshmi Devi',
+    rating: 4.7,
+    bidsCount: 2,
+    category: 'textiles',
+    emoji: '🧵',
+    gradient: 'from-purple-400 to-pink-500'
+  },
+  {
+    id: 4,
+    name: 'Fresh Fish',
+    nameHi: 'ताज़ी मछली',
+    nameTa: 'புதிய மீன்',
+    price: 280,
+    unit: 'kg',
+    location: 'Kochi, KL',
+    seller: 'Thomas Varghese',
+    rating: 4.6,
+    bidsCount: 5,
+    category: 'dairy',
+    emoji: '🐟',
+    gradient: 'from-blue-400 to-cyan-500'
+  },
+  {
+    id: 5,
+    name: 'Alphonso Mangoes',
+    nameHi: 'अल्फांसो आम',
+    nameTa: 'அல்போன்சோ மாம்பழம்',
+    price: 350,
+    unit: 'dozen',
+    location: 'Ratnagiri, MH',
+    seller: 'Santosh Patil',
+    rating: 4.9,
+    bidsCount: 12,
+    category: 'fruits',
+    emoji: '🥭',
+    gradient: 'from-yellow-400 to-orange-500'
+  },
+  {
+    id: 6,
+    name: 'Red Chillies',
+    nameHi: 'लाल मिर्च',
+    nameTa: 'சிவப்பு மிளகாய்',
+    price: 180,
+    unit: 'kg',
+    location: 'Guntur, AP',
+    seller: 'Venkatesh Reddy',
+    rating: 4.5,
+    bidsCount: 4,
+    category: 'spices',
+    emoji: '🌶️',
+    gradient: 'from-red-500 to-red-700'
+  },
+];
+
 export function InteractiveHomepage() {
-  const [selectedLang, setSelectedLang] = useState('en');
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showBidModal, setShowBidModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [bidAmount, setBidAmount] = useState('');
+  const [bidMessage, setBidMessage] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [notification, setNotification] = useState<string | null>(null);
 
-  const languages = [
-    { code: 'en', name: 'English', native: 'English' },
-    { code: 'hi', name: 'Hindi', native: 'हिंदी' },
-    { code: 'ta', name: 'Tamil', native: 'தமிழ்' },
-  ];
+  const { user, logout } = useAuth();
+  const { currentLanguage, setLanguage, t, languages } = useLanguage();
+  const { addBid } = useBidding();
+  const { currentUser } = useDemoUser();
 
-  const products = [
-    { 
-      id: 1, 
-      name: 'Organic Tomatoes', 
-      nameHi: 'जैविक टमाटर', 
-      nameTa: 'இயற்கை தக்காளி',
-      price: 45, 
-      unit: 'kg', 
-      location: 'Chennai, TN', 
-      emoji: '🍅' 
-    },
-    { 
-      id: 2, 
-      name: 'Basmati Rice', 
-      nameHi: 'बासमती चावल', 
-      nameTa: 'பாஸ்மதி அரிசி',
-      price: 85, 
-      unit: 'kg', 
-      location: 'Punjab', 
-      emoji: '🌾' 
-    },
-    { 
-      id: 3, 
-      name: 'Silk Cocoons', 
-      nameHi: 'रेशम कोकून', 
-      nameTa: 'பட்டு கூட்டுப்புழு',
-      price: 450, 
-      unit: 'kg', 
-      location: 'Ramanagara, KA', 
-      emoji: '🧵' 
-    },
-    { 
-      id: 4, 
-      name: 'Fresh Fish', 
-      nameHi: 'ताज़ी मछली', 
-      nameTa: 'புதிய மீன்',
-      price: 280, 
-      unit: 'kg', 
-      location: 'Kochi, KL', 
-      emoji: '🐟' 
-    },
-    { 
-      id: 5, 
-      name: 'Handloom Sarees', 
-      nameHi: 'हथकरघा साड़ी', 
-      nameTa: 'கைத்தறி புடவை',
-      price: 2500, 
-      unit: 'piece', 
-      location: 'Varanasi, UP', 
-      emoji: '👗' 
-    },
-    { 
-      id: 6, 
-      name: 'Alphonso Mangoes', 
-      nameHi: 'अल्फांसो आम', 
-      nameTa: 'அல்போன்சோ மாம்பழம்',
-      price: 120, 
-      unit: 'kg', 
-      location: 'Ratnagiri, MH', 
-      emoji: '🥭' 
-    },
-  ];
+  const filteredProducts = selectedCategory === 'all'
+    ? products
+    : products.filter(p => p.category === selectedCategory);
 
-  const getTranslatedText = (key: string) => {
-    const translations: Record<string, Record<string, string>> = {
-      en: {
-        title: 'Ek Bharath Ek Mandi',
-        subtitle: "India's Voice-First Cross-State Trading Platform",
-        home: 'Home',
-        sellers: 'Sellers',
-        buyers: 'Buyers',
-        demoWorking: '🎉 Demo is Working!',
-        demoSubtitle: 'Your multilingual trading platform is ready for demonstration',
-        sellerDashboard: 'Seller Dashboard',
-        sellerDesc: 'View incoming bids and manage products',
-        buyerDashboard: 'Buyer Dashboard',
-        buyerDesc: 'Track your bids and orders',
-        liveMarketplace: '📦 Live Marketplace',
-        placeBid: '💰 Place Bid',
-        activeBids: 'active bids',
-        top: 'Top',
-        demoFeatures: '✅ Demo Features',
-        multilingualSupport: 'Multilingual Support',
-        multilingualDesc: '8 Indian languages with real-time translation',
-        liveBidding: 'Live Bidding',
-        liveBiddingDesc: 'Real-time bid notifications and management',
-        crossStateTrade: 'Cross-State Trade',
-        crossStateDesc: 'Connect buyers and sellers across India'
-      },
-      hi: {
-        title: 'एक भारत एक मंडी',
-        subtitle: 'भारत का आवाज-प्रथम अंतर-राज्यीय व्यापार मंच',
-        home: 'होम',
-        sellers: 'विक्रेता',
-        buyers: 'खरीदार',
-        demoWorking: '🎉 डेमो काम कर रहा है!',
-        demoSubtitle: 'आपका बहुभाषी व्यापार मंच प्रदर्शन के लिए तैयार है',
-        sellerDashboard: 'विक्रेता डैशबोर्ड',
-        sellerDesc: 'आने वाली बोलियां देखें और उत्पादों का प्रबंधन करें',
-        buyerDashboard: 'खरीदार डैशबोर्ड',
-        buyerDesc: 'अपनी बोलियों और ऑर्डर को ट्रैक करें',
-        liveMarketplace: '📦 लाइव मार्केटप्लेस',
-        placeBid: '💰 बोली लगाएं',
-        activeBids: 'सक्रिय बोलियां',
-        top: 'शीर्ष',
-        demoFeatures: '✅ डेमो सुविधाएं',
-        multilingualSupport: 'बहुभाषी समर्थन',
-        multilingualDesc: 'वास्तविक समय अनुवाद के साथ 8 भारतीय भाषाएं',
-        liveBidding: 'लाइव बिडिंग',
-        liveBiddingDesc: 'वास्तविक समय बोली सूचनाएं और प्रबंधन',
-        crossStateTrade: 'अंतर-राज्यीय व्यापार',
-        crossStateDesc: 'भारत भर में खरीदारों और विक्रेताओं को जोड़ें'
-      },
-      ta: {
-        title: 'ஏக பாரத் ஏக மண்டி',
-        subtitle: 'இந்தியாவின் குரல்-முதல் மாநில-கடந்த வர்த்தக தளம்',
-        home: 'முகப்பு',
-        sellers: 'விற்பனையாளர்கள்',
-        buyers: 'வாங்குபவர்கள்',
-        demoWorking: '🎉 டெமோ வேலை செய்கிறது!',
-        demoSubtitle: 'உங்கள் பன்மொழி வர்த்தக தளம் காட்சிக்கு தயார்',
-        sellerDashboard: 'விற்பனையாளர் டாஷ்போர்டு',
-        sellerDesc: 'வரும் ஏலங்களைப் பார்க்கவும் மற்றும் தயாரிப்புகளை நிர்வகிக்கவும்',
-        buyerDashboard: 'வாங்குபவர் டாஷ்போர்டு',
-        buyerDesc: 'உங்கள் ஏலங்கள் மற்றும் ஆர்டர்களைக் கண்காணிக்கவும்',
-        liveMarketplace: '📦 நேரடி சந்தை',
-        placeBid: '💰 ஏலம் விடவும்',
-        activeBids: 'செயலில் உள்ள ஏலங்கள்',
-        top: 'மேல்',
-        demoFeatures: '✅ டெமோ அம்சங்கள்',
-        multilingualSupport: 'பன்மொழி ஆதரவு',
-        multilingualDesc: 'நேரடி மொழிபெயர்ப்புடன் 8 இந்திய மொழிகள்',
-        liveBidding: 'நேரடி ஏலம்',
-        liveBiddingDesc: 'நேரடி ஏல அறிவிப்புகள் மற்றும் நிர்வாகம்',
-        crossStateTrade: 'மாநில-கடந்த வர்த்தகம்',
-        crossStateDesc: 'இந்தியா முழுவதும் வாங்குபவர்கள் மற்றும் விற்பனையாளர்களை இணைக்கவும்'
-      }
-    };
-    return translations[selectedLang]?.[key] || translations.en[key] || key;
+  const getLocalizedName = (item: any) => {
+    if (currentLanguage === 'hi') return item.nameHi;
+    if (currentLanguage === 'ta') return item.nameTa;
+    return item.name;
   };
 
-  const getProductName = (product: any) => {
-    switch (selectedLang) {
-      case 'hi':
-        return product.nameHi;
-      case 'ta':
-        return product.nameTa;
-      default:
-        return product.name;
-    }
+  const showNotification = (message: string) => {
+    setNotification(message);
+    setTimeout(() => setNotification(null), 3000);
   };
 
-  const handlePlaceBid = (productName: string) => {
-    alert(`Bid placed for ${productName}! Switch to Seller Dashboard to see it.`);
+  const handlePlaceBid = (product: any) => {
+    setSelectedProduct(product);
+    setBidAmount((product.price + 5).toString());
+    setBidMessage('');
+    setShowBidModal(true);
+  };
+
+  const submitBid = () => {
+    if (!selectedProduct || !bidAmount) return;
+
+    addBid({
+      productId: selectedProduct.id.toString(),
+      productName: selectedProduct.name,
+      buyerId: user?.id || 'demo-buyer-001',
+      buyerName: user?.name || 'Demo Buyer',
+      buyerLocation: 'Delhi',
+      sellerId: 'seller-001',
+      sellerName: selectedProduct.seller,
+      amount: parseInt(bidAmount),
+      quantity: 10,
+      unit: selectedProduct.unit,
+      message: bidMessage || (currentLanguage === 'hi' ? 'मुझे यह उत्पाद चाहिए' : currentLanguage === 'ta' ? 'எனக்கு இந்த பொருள் வேண்டும்' : 'I would like to buy this product'),
+      messageTranslated: 'I would like to buy this product',
+      status: 'pending',
+    });
+
+    setShowBidModal(false);
+    showNotification(`✅ Bid placed for ${selectedProduct.name}! Check Seller Dashboard.`);
   };
 
   return (
-    <div className={`min-h-screen bg-white ${selectedLang === 'ta' ? 'script-tamil' : selectedLang === 'hi' ? 'script-devanagari' : 'script-latin'}`}>
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-green-50">
+      {/* Notification Toast */}
+      {notification && (
+        <div className="fixed top-4 right-4 z-50 animate-slide-in">
+          <div className="bg-green-600 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-2">
+            <span>{notification}</span>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
-      <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-4">
+      <header className="sticky top-0 z-40 backdrop-blur-lg bg-white/80 border-b border-orange-100">
+        <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">{getTranslatedText('title')}</h1>
-              <p className="text-orange-100 text-sm">{getTranslatedText('subtitle')}</p>
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white text-xl">
+                🏪
+              </div>
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">
+                  {t('title')}
+                </h1>
+                <p className="text-xs text-gray-500 hidden sm:block">{t('subtitle')}</p>
+              </div>
             </div>
 
-            {/* Navigation */}
-            <div className="flex items-center gap-6">
-              <Link href="/" className="hover:text-orange-200 transition font-medium">
-                {getTranslatedText('home')}
-              </Link>
-              <Link href="/seller" className="hover:text-orange-200 transition font-medium">
-                {getTranslatedText('sellers')}
-              </Link>
-              <Link href="/buyer" className="hover:text-orange-200 transition font-medium">
-                {getTranslatedText('buyers')}
-              </Link>
-              
-              {/* Language Selector */}
+            {/* Navigation - Role-based */}
+            <nav className="hidden md:flex items-center gap-4">
+              <Link href="/" className="text-orange-600 font-semibold">{t('home')}</Link>
+
+              {/* Show role-specific links */}
+              {currentUser?.userType === 'vendor' ? (
+                <>
+                  <Link href="/seller" className="bg-green-100 text-green-700 px-3 py-1.5 rounded-lg font-medium hover:bg-green-200 transition">
+                    📦 {t('sellerDashboard')}
+                  </Link>
+                  <Link href="/seller/add-product" className="text-gray-600 hover:text-green-600 transition">
+                    ➕ {t('addProduct')}
+                  </Link>
+                </>
+              ) : currentUser?.userType?.includes('buyer') ? (
+                <>
+                  <Link href="/buyer" className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg font-medium hover:bg-blue-200 transition">
+                    🛒 {t('buyerDashboard')}
+                  </Link>
+                </>
+              ) : (
+                /* Not logged in - show both options */
+                <>
+                  <Link href="/seller" className="text-gray-600 hover:text-green-600 transition">{t('sellers')}</Link>
+                  <Link href="/buyer" className="text-gray-600 hover:text-blue-600 transition">{t('buyers')}</Link>
+                </>
+              )}
+            </nav>
+
+            {/* Right side */}
+            <div className="flex items-center gap-3">
+              {/* Language */}
               <select
-                value={selectedLang}
-                onChange={(e) => setSelectedLang(e.target.value)}
-                className="bg-orange-400 text-white px-3 py-2 rounded-lg border-none focus:ring-2 focus:ring-white"
+                value={currentLanguage}
+                onChange={(e) => setLanguage(e.target.value)}
+                className="bg-white border-2 border-orange-200 text-gray-900 px-4 py-2 rounded-xl font-medium focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer"
               >
                 {languages.map(lang => (
-                  <option key={lang.code} value={lang.code} className="text-gray-900">
-                    {lang.native}
-                  </option>
+                  <option key={lang.code} value={lang.code}>{lang.native}</option>
                 ))}
               </select>
+
+              {/* User Switcher */}
+              <UserSwitcher />
             </div>
           </div>
         </div>
       </header>
+
       {/* Hero Section */}
-      <section className="py-12 px-4 bg-gradient-to-b from-orange-50 to-white">
+      <section className="relative py-12 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-green-500/10 -z-10"></div>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            {getTranslatedText('demoWorking')}
+          <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            🏆 AI for Bharat Hackathon
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {currentLanguage === 'hi' ? 'भाषा की बाधा तोड़ें' :
+              currentLanguage === 'ta' ? 'மொழித் தடைகளை உடைக்கவும்' :
+                'Break Language Barriers'}
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            {getTranslatedText('demoSubtitle')}
+          <p className="text-xl text-gray-600 mb-8">
+            {currentLanguage === 'hi' ? 'भारत भर में खरीदारों और विक्रेताओं को जोड़ने वाला मंच' :
+              currentLanguage === 'ta' ? 'இந்தியா முழுவதும் வாங்குபவர்களையும் விற்பனையாளர்களையும் இணைக்கும்' :
+                'Connect buyers and sellers across India with real-time translation'}
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <Link 
-              href="/seller"
-              className="bg-green-600 text-white p-6 rounded-xl hover:bg-green-700 transition text-center block"
-            >
-              <div className="text-4xl mb-2">👨‍🌾</div>
-              <h3 className="text-xl font-bold mb-2">{getTranslatedText('sellerDashboard')}</h3>
-              <p className="text-green-100">{getTranslatedText('sellerDesc')}</p>
-            </Link>
+          {/* Quick Actions - Role Based */}
+          <div className="flex flex-wrap justify-center gap-4">
+            {/* Show Seller Dashboard if no user OR user is vendor */}
+            {(!currentUser || currentUser.userType === 'vendor') && (
+              <Link
+                href="/seller"
+                className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-2xl hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
+              >
+                <span className="text-2xl group-hover:scale-110 transition">👨‍🌾</span>
+                <div className="text-left">
+                  <div className="font-bold">{t('sellerDashboard')}</div>
+                  <div className="text-sm opacity-80">{t('sellerDesc')}</div>
+                </div>
+              </Link>
+            )}
 
-            <Link 
-              href="/buyer"
-              className="bg-blue-600 text-white p-6 rounded-xl hover:bg-blue-700 transition text-center block"
-            >
-              <div className="text-4xl mb-2">🛒</div>
-              <h3 className="text-xl font-bold mb-2">{getTranslatedText('buyerDashboard')}</h3>
-              <p className="text-blue-100">{getTranslatedText('buyerDesc')}</p>
-            </Link>
+            {/* Show Buyer Dashboard if no user OR user is buyer */}
+            {(!currentUser || currentUser.userType?.includes('buyer')) && (
+              <Link
+                href="/buyer"
+                className="group bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
+              >
+                <span className="text-2xl group-hover:scale-110 transition">🛒</span>
+                <div className="text-left">
+                  <div className="font-bold">{t('buyerDashboard')}</div>
+                  <div className="text-sm opacity-80">{t('buyerDesc')}</div>
+                </div>
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Category Chips - Horizontal Scrollable */}
+      <section className="py-6 border-y border-gray-100 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-3 px-4 pb-2">
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`flex items-center gap-2 px-5 py-3 rounded-full whitespace-nowrap transition-all ${selectedCategory === cat.id
+                    ? 'bg-orange-500 text-white shadow-lg scale-105'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                >
+                  <span>{cat.emoji}</span>
+                  <span className="font-medium">{getLocalizedName(cat)}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Products Grid */}
-      <section className="py-12 px-4 bg-gray-50">
+      <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">{getTranslatedText('liveMarketplace')}</h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">
+              📦 {t('liveMarketplace')}
+            </h2>
+            <span className="text-sm text-gray-500">{filteredProducts.length} products</span>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map(product => (
-              <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-                <div className="h-40 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
-                  <span className="text-5xl">{product.emoji}</span>
+            {filteredProducts.map(product => (
+              <div
+                key={product.id}
+                className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-1 border border-gray-100"
+              >
+                {/* Product Image Area */}
+                <div className={`h-44 bg-gradient-to-br ${product.gradient} flex items-center justify-center relative`}>
+                  <span className="text-7xl group-hover:scale-110 transition-transform">{product.emoji}</span>
+
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex gap-2">
+                    {product.bidsCount > 5 && (
+                      <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                        🔥 Hot
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                    ⭐ {product.rating}
+                  </div>
                 </div>
 
-                <div className="p-4">
+                {/* Product Info */}
+                <div className="p-5">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <h3 className="font-bold text-gray-900">{getProductName(product)}</h3>
-                      {selectedLang !== 'en' && (
-                        <p className="text-gray-500 text-sm">{product.name}</p>
+                      <h3 className="font-bold text-lg text-gray-900 group-hover:text-orange-600 transition">
+                        {getLocalizedName(product)}
+                      </h3>
+                      {currentLanguage !== 'en' && (
+                        <p className="text-xs text-gray-500">{product.name}</p>
                       )}
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-green-600">₹{product.price}/{product.unit}</div>
+                      <div className="text-xl font-bold text-green-600">₹{product.price}</div>
+                      <div className="text-xs text-gray-500">per {product.unit}</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                    <span>📍 {product.location}</span>
+                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                    <span className="flex items-center gap-1">📍 {product.location}</span>
+                    <span className="flex items-center gap-1">👤 {product.seller}</span>
                   </div>
 
-                  <div className="bg-orange-50 rounded-lg p-2 mb-3">
+                  {/* Bid Info */}
+                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-3 mb-4">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-600">3 {getTranslatedText('activeBids')}</span>
-                      <span className="font-bold text-orange-600">{getTranslatedText('top')}: ₹{product.price + 5}/{product.unit}</span>
+                      <span className="text-gray-600">{product.bidsCount} {t('activeBids')}</span>
+                      <span className="font-bold text-orange-600">
+                        {t('top')}: ₹{product.price + 5}/{product.unit}
+                      </span>
                     </div>
                   </div>
 
-                  <button 
-                    onClick={() => handlePlaceBid(product.name)}
-                    className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition font-medium"
-                  >
-                    {getTranslatedText('placeBid')}
-                  </button>
+                  {/* Action Buttons */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handlePlaceBid(product)}
+                      className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl hover:shadow-lg transition-all hover:scale-[1.02] font-semibold flex items-center justify-center gap-2"
+                    >
+                      💰 {t('placeBid')}
+                    </button>
+                    <Link
+                      href="/chat/demo"
+                      className="flex-shrink-0 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-4 py-3 rounded-xl hover:shadow-lg transition flex items-center justify-center"
+                    >
+                      💬
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-      {/* Features */}
-      <section className="py-12 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">{getTranslatedText('demoFeatures')}</h2>
+
+      {/* Features Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-12">{t('demoFeatures')}</h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl mb-4">🌐</div>
-              <h3 className="font-bold text-gray-900 mb-2">{getTranslatedText('multilingualSupport')}</h3>
-              <p className="text-gray-600">{getTranslatedText('multilingualDesc')}</p>
+            <div className="bg-white p-8 rounded-3xl shadow-lg text-center hover:shadow-xl transition">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+                🌐
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-2">{t('multilingualSupport')}</h3>
+              <p className="text-gray-600">{t('multilingualDesc')}</p>
             </div>
-            <div className="text-center">
-              <div className="text-4xl mb-4">💰</div>
-              <h3 className="font-bold text-gray-900 mb-2">{getTranslatedText('liveBidding')}</h3>
-              <p className="text-gray-600">{getTranslatedText('liveBiddingDesc')}</p>
+
+            <div className="bg-white p-8 rounded-3xl shadow-lg text-center hover:shadow-xl transition">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+                💰
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-2">{t('liveBidding')}</h3>
+              <p className="text-gray-600">{t('liveBiddingDesc')}</p>
             </div>
-            <div className="text-center">
-              <div className="text-4xl mb-4">🤝</div>
-              <h3 className="font-bold text-gray-900 mb-2">{getTranslatedText('crossStateTrade')}</h3>
-              <p className="text-gray-600">{getTranslatedText('crossStateDesc')}</p>
+
+            <div className="bg-white p-8 rounded-3xl shadow-lg text-center hover:shadow-xl transition">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+                🤝
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-2">{t('crossStateTrade')}</h3>
+              <p className="text-gray-600">{t('crossStateDesc')}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 px-4">
+      <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl font-bold mb-2">एक भारत एक मंडी</p>
+          <div className="text-3xl font-bold mb-2">एक भारत एक मंडी</div>
           <p className="text-gray-400 mb-4">Breaking Language Barriers in Trade</p>
+          <div className="flex justify-center gap-6 mb-6">
+            <Link href="/seller" className="text-green-400 hover:underline">Seller Dashboard</Link>
+            <Link href="/buyer" className="text-blue-400 hover:underline">Buyer Dashboard</Link>
+          </div>
           <p className="text-gray-500 text-sm">🏆 AI for Bharat - Republic Day 24-Hour Sprint Challenge</p>
         </div>
       </footer>
+
+      {/* Bid Modal */}
+      {showBidModal && selectedProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl animate-scale-in overflow-hidden">
+            {/* Modal Header */}
+            <div className={`h-24 bg-gradient-to-r ${selectedProduct.gradient} flex items-center justify-between px-6`}>
+              <div className="flex items-center gap-4">
+                <span className="text-5xl">{selectedProduct.emoji}</span>
+                <div className="text-white">
+                  <h3 className="font-bold text-xl">{selectedProduct.name}</h3>
+                  <p className="text-white/80 text-sm">by {selectedProduct.seller}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowBidModal(false)}
+                className="text-white/80 hover:text-white text-2xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6">
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-gray-600">Current Price</span>
+                  <span className="text-2xl font-bold text-green-600">₹{selectedProduct.price}/{selectedProduct.unit}</span>
+                </div>
+
+                <label className="block text-sm font-medium text-gray-700 mb-2">Your Bid Amount (₹/{selectedProduct.unit})</label>
+                <input
+                  type="number"
+                  value={bidAmount}
+                  onChange={(e) => setBidAmount(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none text-xl font-bold text-gray-900 bg-white"
+                  placeholder="Enter your bid"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Message (Optional)</label>
+                <textarea
+                  value={bidMessage}
+                  onChange={(e) => setBidMessage(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none resize-none text-gray-900 bg-white"
+                  rows={2}
+                  placeholder={currentLanguage === 'hi' ? 'अपना संदेश लिखें...' : currentLanguage === 'ta' ? 'உங்கள் செய்தியை எழுதுங்கள்...' : 'Type your message...'}
+                />
+              </div>
+
+              <button
+                onClick={submitBid}
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 rounded-xl hover:shadow-lg transition font-bold text-lg flex items-center justify-center gap-2"
+              >
+                🚀 Submit Bid
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Login Modal */}
+      <SimpleLoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSuccess={() => {
+          setShowLoginModal(false);
+          window.location.reload();
+        }}
+      />
+
+      {/* Custom Styles */}
+      <style jsx global>{`
+        @keyframes slide-in {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scale-in {
+          from { transform: scale(0.9); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        .animate-slide-in { animation: slide-in 0.3s ease-out; }
+        .animate-scale-in { animation: scale-in 0.2s ease-out; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </div>
   );
 }
